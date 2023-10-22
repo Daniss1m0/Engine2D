@@ -18,8 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
