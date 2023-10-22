@@ -37,17 +37,23 @@ void Engine::Run() {
         ALLEGRO_EVENT event;
         al_wait_for_event(eventQueue, &event);
 
-        if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            running = false;
-        }
-        else if (event.type == ALLEGRO_EVENT_TIMER) {
+        switch(event.type) {
+            case ALLEGRO_EVENT_DISPLAY_CLOSE: {
+                running = false;
+                break;
+            }
+       
+            case ALLEGRO_EVENT_TIMER: {
+                break;
+            }
 
-        }
-        else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+            case ALLEGRO_EVENT_KEY_DOWN: {
+                break;
+            }
 
-        }
-        else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-
+            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN: {
+                break;
+            }
         }
 
         al_clear_to_color(al_map_rgb(255, 255, 255));
