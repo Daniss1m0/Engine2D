@@ -1,6 +1,6 @@
 ﻿#include "engine.h"
 
-Engine::Engine(int width, int height) : screenWidth(width), screenHeight(height) {}
+Engine::Engine(int width, int height, float fps) : screenWidth(width), screenHeight(height), FPS(fps) {}
 
 bool Engine::Init() {
     if (!al_init()) {
@@ -23,15 +23,15 @@ bool Engine::Init() {
     al_register_event_source(eventQueue, al_get_keyboard_event_source());
     al_register_event_source(eventQueue, al_get_mouse_event_source());
 
-    timer = al_create_timer(1.0 / FPS);
-    al_register_event_source(eventQueue, al_get_timer_event_source(timer));
+    fpsTimer = al_create_timer(1.0 / FPS);
+    al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 
     return true;
 }
 
 void Engine::Run() {
     bool running = true;
-    al_start_timer(timer);
+    al_start_timer(fpsTimer);
 
     while (running) {
         ALLEGRO_EVENT event;
@@ -65,5 +65,5 @@ void Engine::Run() {
 void Engine::Deinit() {
     al_destroy_display(display);
     al_destroy_event_queue(eventQueue);
-    al_destroy_timer(timer);
+    al_destroy_timer(fpsTimer);
 }
