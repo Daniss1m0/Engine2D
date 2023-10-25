@@ -8,7 +8,6 @@ bool Engine::Init() {
         return false;
     }
 
-    al_init_primitives_addon();
     al_install_keyboard();
     al_install_mouse();
 

@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="primitiveRenderer.h" />
     <ClInclude Include="source\engine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
