@@ -1,4 +1,4 @@
-#include "primitiveRenderer.h"
+ï»¿#include "primitiveRenderer.h"
 
 PrimitiveRenderer& PrimitiveRenderer::GetInstance(ALLEGRO_DISPLAY* display) {
     static PrimitiveRenderer instance(display); // Statyczna instancja klasy
@@ -12,7 +12,7 @@ PrimitiveRenderer::PrimitiveRenderer(ALLEGRO_DISPLAY* display) : display_(displa
 bool PrimitiveRenderer::Init()
 {
     if (!al_init_primitives_addon()) {
-        std::cerr << "B³¹d inicjalizacji dodatku do rysowania prymitywów." << std::endl;
+        std::cerr << "BÅ‚Ä…d inicjalizacji dodatku do rysowania prymitywÃ³w." << std::endl;
         return false;
     }
     return true;
