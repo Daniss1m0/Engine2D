@@ -1,20 +1,35 @@
 #pragma once
+
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
-#include <iostream>
 
 class PrimitiveRenderer {
-protected:
-    ALLEGRO_DISPLAY* display_;
-    PrimitiveRenderer() : display_(nullptr) {}
-    PrimitiveRenderer(ALLEGRO_DISPLAY* display);
+public:
+    static PrimitiveRenderer& getInstance();
+
+    void Initialize(ALLEGRO_DISPLAY* display);
+
+    void ClearScreen();
+    void DrawPixel(float x, float y, ALLEGRO_COLOR color);
+    void DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color);
+    void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color);
+    void DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color);
+    void DrawRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color);
+    void DrawFilledRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color);
+    void DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, ALLEGRO_COLOR color);
+    void DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, ALLEGRO_COLOR color);
+    void DrawCircle(float x, float y, float radius, ALLEGRO_COLOR color);
+    void DrawFilledCircle(float x, float y, float radius, ALLEGRO_COLOR color);
+    void DrawEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color);
+    void DrawFilledEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color);
+    void DrawArc(float cx, float cy, float r, float start_theta, float end_theta, ALLEGRO_COLOR color);
+
+    void FlipDisplay();
+
+private:
+    PrimitiveRenderer();
     PrimitiveRenderer(const PrimitiveRenderer&) = delete;
     void operator=(const PrimitiveRenderer&) = delete;
-public:
-    bool Init();
-    static PrimitiveRenderer& GetInstance(ALLEGRO_DISPLAY* display);
-    void ClearScreen();
-    void DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color);
-    void DrawCircle(float x, float y, float radius, const ALLEGRO_COLOR& color);
-    void FlipDisplay();
+
+    ALLEGRO_DISPLAY* display_;
 };
