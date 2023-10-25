@@ -65,11 +65,11 @@ void Engine::Run() {
         renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
         renderer.DrawLine(400.0, 400.0, 500.0, 500.0, color, 10.0);
 
-        Point2D start(100, 0);
+        Point2D start(100, 100);
         Point2D end(30, -150);
         LineSegment line(start, end);
         line.Draw(renderer, color, 2.0, true);
-
+        //
         renderer.FlipDisplay();
     }
 }
