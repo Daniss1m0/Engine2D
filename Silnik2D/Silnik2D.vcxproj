@@ -168,12 +168,14 @@
     <ClCompile Include="source\primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\engine.h" />
     <ClInclude Include="source\LineSegment.h" />
     <ClInclude Include="source\point2D.h" />
     <ClInclude Include="source\primitiveRenderer.h" />
+    <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

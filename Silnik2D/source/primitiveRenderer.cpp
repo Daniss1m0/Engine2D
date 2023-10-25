@@ -134,18 +134,36 @@ void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegment
     }
 }
 
-/*std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength) {
+std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength) {
     std::vector<Point2D> spiralPoints;
 
     float x = centerX;
     float y = centerY;
     spiralPoints.push_back(Point2D(x, y));
+    x = x + sideLength;
+    spiralPoints.push_back(Point2D(x,y));
 
-    for (int turn = 0; turn < numTurns; ++turn) {
-        
-        spiralPoints.push_back(Point2D(x,y));
+    Vector2 lastVector(sideLength, 0.0);
+    int i = 0;
+    for (i = 0; i < numTurns; i++) {
+       
+        Vector2 rightVector = lastVector.Unit().RightVector()*(lastVector.Magnitude()+sideLength);
+
+        float xS = x;
+        float yS = y;
+
+        x += rightVector.x;
+        y += rightVector.y;
+
+        lastVector.x = x - xS;
+        lastVector.y = y - yS;
+
+        Point2D newPoint(x, y);
+
+        spiralPoints.push_back(newPoint);
         
     }
 
+
     return spiralPoints;
-}*/
+}

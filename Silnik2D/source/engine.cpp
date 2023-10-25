@@ -61,7 +61,7 @@ void Engine::Run() {
         }
         renderer.ClearScreen();
 
-        ALLEGRO_COLOR color = al_map_rgb(255, 0, 0); 
+        ALLEGRO_COLOR color = al_map_rgb(255, 255, 255); 
         /*renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
         renderer.DrawLine(400.0, 400.0, 500.0, 500.0, color, 10.0);
 
@@ -69,7 +69,7 @@ void Engine::Run() {
         Point2D end(30, -150);
         LineSegment line(start, end);*/
 
-        //renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 10, 50.0f), color, 1.0);
+        renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 300, 3.0f), color, 1);
 
         //line.Draw(renderer, color, 2.0, true);
         //
