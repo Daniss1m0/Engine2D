@@ -69,7 +69,7 @@ void Engine::Run() {
         Point2D end(30, -150);
         LineSegment line(start, end);*/
 
-        renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 300, 3.0f), color, 1);
+        renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 404, 2.0f), color, 1.0);
 
         //line.Draw(renderer, color, 2.0, true);
         //
