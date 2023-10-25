@@ -1,5 +1,14 @@
 #include "primitiveRenderer.h"
 
+PrimitiveRenderer& PrimitiveRenderer::GetInstance(ALLEGRO_DISPLAY* display) {
+    static PrimitiveRenderer instance(display); // Statyczna instancja klasy
+    return instance;
+}
+
+PrimitiveRenderer::PrimitiveRenderer(ALLEGRO_DISPLAY* display) : display_(display)
+{
+}
+
 bool PrimitiveRenderer::Init()
 {
     if (!al_init_primitives_addon()) {
@@ -9,20 +18,16 @@ bool PrimitiveRenderer::Init()
     return true;
 }
 
-static PrimitiveRenderer&::getInstance() {
-    static PrimitiveRenderer instance; // Statyczna instancja klasy
-    return instance;
-}
 
 void PrimitiveRenderer::ClearScreen() {
     al_clear_to_color(al_map_rgb(0, 0, 0)); // Czyszczenie ekranu na czarno
 }
 
-void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
     al_draw_filled_rectangle(x, y, x + width, y + height, color);
 }
 
-void PrimitiveRenderer::DrawCircle(float x, float y, float radius, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawCircle(float x, float y, float radius, const ALLEGRO_COLOR& color) {
     al_draw_filled_circle(x, y, radius, color);
 }
 
