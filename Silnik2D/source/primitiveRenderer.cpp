@@ -99,7 +99,8 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
             }
             x += sx;
         }
-    } else {
+    } 
+    else {
         float error = dy / 2.0f;
         while (y != y2) {
             for (float i = -lineWidth / 2.0f; i < lineWidth / 2.0f; i += 1.0f) {

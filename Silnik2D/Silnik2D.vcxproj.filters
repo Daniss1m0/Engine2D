@@ -15,17 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine.cpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitiveRenderer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="source\point2D.cpp">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LineSegment.cpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +39,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="source\point2D.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="source\LineSegment.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

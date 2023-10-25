@@ -62,7 +62,6 @@ void Engine::Run() {
         ALLEGRO_COLOR color = al_map_rgb(255, 0, 0); 
         renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
         renderer.DrawLine(400.0, 400.0, 500.0, 500.0, color, 10.0);
-
         renderer.FlipDisplay();
     }
 }
