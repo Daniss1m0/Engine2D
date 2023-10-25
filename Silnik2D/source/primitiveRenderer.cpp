@@ -24,8 +24,8 @@ void PrimitiveRenderer::DrawPixel(float x, float y, ALLEGRO_COLOR color) {
     al_draw_pixel(x, y, color);
 }
 
-void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color) {
-    al_draw_line(x1, y1, x2, y2, color, 1.0);
+void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness) {
+    al_draw_line(x1, y1, x2, y2, color, thickness);
 }
 
 void PrimitiveRenderer::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color) {
@@ -75,5 +75,42 @@ void PrimitiveRenderer::DrawArc(float cx, float cy, float r, float start_theta, 
 void PrimitiveRenderer::FlipDisplay() {
     if (display_) {
         al_flip_display();
+    }
+}
+
+void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float lineWidth) {
+    float dx = fabs(x2 - x1);
+    float dy = fabs(y2 - y1);
+    float x = x1;
+    float y = y1;
+    float sx = (x1 < x2) ? 1.0f : -1.0f;
+    float sy = (y1 < y2) ? 1.0f : -1.0f;
+
+    if (dx > dy) {
+        float error = dx / 2.0f;
+        while (x != x2) {
+            for (float i = -lineWidth / 2.0f; i < lineWidth / 2.0f; i += 1.0f) {
+                al_draw_pixel(x, y + i, color);
+            }
+            error -= dy;
+            if (error < 0) {
+                y += sy;
+                error += dx;
+            }
+            x += sx;
+        }
+    } else {
+        float error = dy / 2.0f;
+        while (y != y2) {
+            for (float i = -lineWidth / 2.0f; i < lineWidth / 2.0f; i += 1.0f) {
+                al_draw_pixel(x + i, y, color);
+            }
+            error -= dx;
+            if (error < 0) {
+                x += sx;
+                error += dy;
+            }
+            y += sy;
+        }
     }
 }

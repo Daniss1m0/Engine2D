@@ -59,13 +59,10 @@ void Engine::Run() {
         }
         renderer.ClearScreen();
 
-        float x = 200.0f;
-        float y = 200.0f;
-        float width = 100.0f;
-        float height = 100.0f;
-        ALLEGRO_COLOR color = al_map_rgb(255, 0, 0); // Kolor czerwony
-        renderer.DrawFilledRectangle(x, y, width, height, color);
-        
+        ALLEGRO_COLOR color = al_map_rgb(255, 0, 0); 
+        renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
+        renderer.DrawLine(400.0, 400.0, 500.0, 500.0, color, 10.0);
+
         renderer.FlipDisplay();
     }
 }

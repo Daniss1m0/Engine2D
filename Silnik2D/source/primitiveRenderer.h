@@ -11,7 +11,7 @@ public:
 
     void ClearScreen();
     void DrawPixel(float x, float y, ALLEGRO_COLOR color);
-    void DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color);
+    void DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness);
     void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color);
     void DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color);
     void DrawRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color);
@@ -23,7 +23,7 @@ public:
     void DrawEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color);
     void DrawFilledEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color);
     void DrawArc(float cx, float cy, float r, float start_theta, float end_theta, ALLEGRO_COLOR color);
-
+    void DrawLineIncremental(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float lineWidth);
     void FlipDisplay();
 
 private:
