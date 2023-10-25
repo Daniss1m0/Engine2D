@@ -163,12 +163,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lineSegment.cpp" />
     <ClCompile Include="point2D.cpp" />
     <ClCompile Include="source\primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lineSegment.h" />
     <ClInclude Include="point2D.h" />
     <ClInclude Include="source\engine.h" />
     <ClInclude Include="source\primitiveRenderer.h" />

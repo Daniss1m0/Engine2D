@@ -114,3 +114,19 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
         }
     }
 }
+
+void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, ALLEGRO_COLOR color, float lineWidth) {
+    if (points.size() < 2) {
+        return; // Linia łamana musi mieć co najmniej 2 punkty
+    }
+
+    for (size_t i = 0; i < points.size() - 1; ++i) {
+        DrawLineIncremental(points[i].GetX(), points[i].GetY(), points[i + 1].GetX(), points[i + 1].GetY(), color, lineWidth);
+    }
+}
+
+void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegments, ALLEGRO_COLOR color, float lineWidth) {
+    for (const LineSegment& segment : lineSegments) {
+        DrawLineIncremental(segment.GetStart().GetX(), segment.GetStart().GetY(), segment.GetEnd().GetX(), segment.GetEnd().GetY(), color, lineWidth);
+    }
+}
