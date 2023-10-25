@@ -18,11 +18,11 @@ void LineSegment::SetEndPoint(Point2D end) {
     end_ = end;
 }
 
-void LineSegment::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float thickness, bool incremental) {
-    if (incremental) {
-        renderer.DrawLineIncremental(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, thickness);
+void LineSegment::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float grubosc, bool przyrostowy) {
+    if (przyrostowy) {
+        renderer.DrawLineIncremental(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, grubosc);
     }
     else {
-        renderer.DrawLine(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, thickness);
+        renderer.DrawLine(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, grubosc);
     }
 }

@@ -17,6 +17,6 @@ public:
     void SetStartPoint(Point2D start);
     void SetEndPoint(Point2D end);
 
-    void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float thickness, bool incremental);
+    void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float thickness, bool przyrostowy);
 };
 
