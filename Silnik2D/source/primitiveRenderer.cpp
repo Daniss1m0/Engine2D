@@ -1,5 +1,5 @@
 ﻿#include "PrimitiveRenderer.h"
-#include <iostream>
+
 
 PrimitiveRenderer::PrimitiveRenderer() : display_(nullptr) {
 }
@@ -115,3 +115,37 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
         }
     }
 }
+
+
+void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, ALLEGRO_COLOR color, float lineWidth) {
+    if (points.size() < 2) {
+        std::cout << "linia lamana musi miec wiecej niz 1 punkt" << std::endl;
+        return;
+    }
+
+    for (size_t i = 0; i < points.size() - 1; ++i) {
+        DrawLine(points[i].GetX(), points[i].GetY(), points[i + 1].GetX(), points[i + 1].GetY(), color, lineWidth);
+    }
+}
+
+void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegments, ALLEGRO_COLOR color, float lineWidth) {
+    for (const LineSegment& segment : lineSegments) {
+        DrawLine(segment.GetStartPoint().GetX(), segment.GetStartPoint().GetY(), segment.GetEndPoint().GetX(), segment.GetEndPoint().GetY(), color, lineWidth);
+    }
+}
+
+/*std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength) {
+    std::vector<Point2D> spiralPoints;
+
+    float x = centerX;
+    float y = centerY;
+    spiralPoints.push_back(Point2D(x, y));
+
+    for (int turn = 0; turn < numTurns; ++turn) {
+        
+        spiralPoints.push_back(Point2D(x,y));
+        
+    }
+
+    return spiralPoints;
+}*/

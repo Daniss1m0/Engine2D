@@ -24,6 +24,6 @@ void Point2D::SetPosition(float x, float y) {
     y_ = y;
 }
 
-void Point2D::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize) {
+/*void Point2D::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize) {
     renderer.DrawFilledCircle(x_, y_, pointSize, color);
-}
+}*/

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "primitiveRenderer.h"
+//#include "primitiveRenderer.h"
 
 class Point2D {
 private:
@@ -17,5 +17,5 @@ public:
     void SetY(float y);
     void SetPosition(float x, float y);
 
-    void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize = 1.0f);
+   // void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize = 1.0f);
 };
