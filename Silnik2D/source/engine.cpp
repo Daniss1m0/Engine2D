@@ -32,6 +32,9 @@ void Engine::Run() {
     bool running = true;
     al_start_timer(fpsTimer);
 
+    PrimitiveRenderer& renderer = PrimitiveRenderer::getInstance();
+    renderer.Initialize(display);
+
     while (running) {
         ALLEGRO_EVENT event;
         al_wait_for_event(eventQueue, &event);
@@ -54,10 +57,16 @@ void Engine::Run() {
                 break;
             }
         }
+        renderer.ClearScreen();
 
-        al_clear_to_color(al_map_rgb(255, 255, 255));
-
-        al_flip_display();
+        float x = 200.0f;
+        float y = 200.0f;
+        float width = 100.0f;
+        float height = 100.0f;
+        ALLEGRO_COLOR color = al_map_rgb(255, 0, 0); // Kolor czerwony
+        renderer.DrawFilledRectangle(x, y, width, height, color);
+        
+        renderer.FlipDisplay();
     }
 }
 
