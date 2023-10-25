@@ -3,7 +3,7 @@
 #include "primitiveRenderer.h"
 
 class Point2D {
-public:
+public: 
     Point2D(float x = 0.0f, float y = 0.0f);
 
     // Metody odczytu wspó³rzêdnych punktu
