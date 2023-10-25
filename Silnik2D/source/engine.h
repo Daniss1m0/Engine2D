@@ -1,8 +1,7 @@
 #pragma once
 
-
 #include <iostream>
-#include "primitiveRenderer.h"
+#include "PrimitiveRenderer.h"
 
 class Engine {
 private:
