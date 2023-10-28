@@ -2,11 +2,11 @@
 
 LineSegment::LineSegment(Point2D start, Point2D end) : _start(start), _end(end) {}
 
-Point2D LineSegment::GetStartPoint() const {
+const Point2D& LineSegment::GetStartPoint() const {
     return _start;
 }
 
-Point2D LineSegment::GetEndPoint() const {
+const Point2D& LineSegment::GetEndPoint() const {
     return _end;
 }
 
@@ -18,11 +18,13 @@ void LineSegment::SetEndPoint(Point2D end) {
     _end = end;
 }
 
-/*void LineSegment::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float grubosc, bool przyrostowy) {
-    if (przyrostowy) {
-        renderer.DrawLineIncremental(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, grubosc);
+#if 0
+void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float grubosc, bool additive) {
+    if (additive) {
+        renderer.DrawLineIncremental(_start.GetX(), _start.GetY(), _end.GetX(), _end.GetY(), color, grubosc);
     }
     else {
-        renderer.DrawLine(start_.GetX(), start_.GetY(), end_.GetX(), end_.GetY(), color, grubosc);
+        renderer.DrawLine(_end.GetX(), _end.GetY(), _end.GetX(), _end.GetY(), color, grubosc);
     }
-}*/
+}
+#endif

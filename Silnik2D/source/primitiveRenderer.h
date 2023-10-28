@@ -1,11 +1,12 @@
 #pragma once
 
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro.h>
 #include <iostream>
 #include <vector>
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
-#include "LineSegment.h"
 #include "vector2.h"
+#include "LineSegment.h"
+#include "point2D.h"
 
 class PrimitiveRenderer {
 public:
