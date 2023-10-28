@@ -5,8 +5,8 @@
 
 class LineSegment {
 private:
-    Point2D start_;
-    Point2D end_;
+    Point2D _start;
+    Point2D _end;
 
 public:
     LineSegment(Point2D start, Point2D end);

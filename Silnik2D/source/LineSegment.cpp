@@ -1,21 +1,21 @@
 #include "LineSegment.h"
 
-LineSegment::LineSegment(Point2D start, Point2D end) : start_(start), end_(end) {}
+LineSegment::LineSegment(Point2D start, Point2D end) : _start(start), _end(end) {}
 
 Point2D LineSegment::GetStartPoint() const {
-    return start_;
+    return _start;
 }
 
 Point2D LineSegment::GetEndPoint() const {
-    return end_;
+    return _end;
 }
 
 void LineSegment::SetStartPoint(Point2D start) {
-    start_ = start;
+    _start = start;
 }
 
 void LineSegment::SetEndPoint(Point2D end) {
-    end_ = end;
+    _end = end;
 }
 
 /*void LineSegment::Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float grubosc, bool przyrostowy) {

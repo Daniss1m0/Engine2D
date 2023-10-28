@@ -1,7 +1,6 @@
 ﻿#include "PrimitiveRenderer.h"
 
-
-PrimitiveRenderer::PrimitiveRenderer() : display_(nullptr) {
+PrimitiveRenderer::PrimitiveRenderer() : _display(nullptr) {
 }
 
 PrimitiveRenderer& PrimitiveRenderer::getInstance() {
@@ -10,7 +9,7 @@ PrimitiveRenderer& PrimitiveRenderer::getInstance() {
 }
 
 void PrimitiveRenderer::Initialize(ALLEGRO_DISPLAY* display) {
-    display_ = display;
+    _display = display;
     if (!al_init_primitives_addon()) {
         std::cerr << "Błąd inicjalizacji dodatku do rysowania prymitywów." << std::endl;
     }
@@ -20,65 +19,65 @@ void PrimitiveRenderer::ClearScreen() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
-void PrimitiveRenderer::DrawPixel(float x, float y, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawPixel(float x, float y, const ALLEGRO_COLOR& color) {
     al_draw_pixel(x, y, color);
 }
 
-void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness) {
+void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float thickness) {
     al_draw_line(x1, y1, x2, y2, color, thickness);
 }
 
-void PrimitiveRenderer::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
     al_draw_triangle(x1, y1, x2, y2, x3, y3, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
     al_draw_filled_triangle(x1, y1, x2, y2, x3, y3, color);
 }
 
-void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
     al_draw_rectangle(x, y, x + width, y + height, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledRectangle(float x, float y, float width, float height, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawFilledRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
     al_draw_filled_rectangle(x, y, x + width, y + height, color);
 }
 
-void PrimitiveRenderer::DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
     al_draw_rounded_rectangle(x, y, x + width, y + height, rx, ry, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
     al_draw_filled_rounded_rectangle(x, y, x + width, y + height, rx, ry, color);
 }
 
-void PrimitiveRenderer::DrawCircle(float x, float y, float radius, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawCircle(float x, float y, float radius, const ALLEGRO_COLOR& color) {
     al_draw_circle(x, y, radius, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledCircle(float x, float y, float radius, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawFilledCircle(float x, float y, float radius, const ALLEGRO_COLOR& color) {
     al_draw_filled_circle(x, y, radius, color);
 }
 
-void PrimitiveRenderer::DrawEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color) {
     al_draw_ellipse(cx, cy, rx, ry, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledEllipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawFilledEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color) {
     al_draw_filled_ellipse(cx, cy, rx, ry, color);
 }
 
-void PrimitiveRenderer::DrawArc(float cx, float cy, float r, float start_theta, float end_theta, ALLEGRO_COLOR color) {
+void PrimitiveRenderer::DrawArc(float cx, float cy, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color) {
     al_draw_arc(cx, cy, r, start_theta, end_theta, color, 1.0);
 }
 
 void PrimitiveRenderer::FlipDisplay() {
-    if (display_) {
+    if (_display) {
         al_flip_display();
     }
 }
 
-void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float lineWidth) {
+void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float lineWidth) {
     float dx = fabs(x2 - x1);
     float dy = fabs(y2 - y1);
     float x = x1;
@@ -117,7 +116,7 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
 }
 
 
-void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, ALLEGRO_COLOR color, float lineWidth) {
+void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float lineWidth) {
     if (points.size() < 2) {
         std::cout << "linia lamana musi miec wiecej niz 1 punkt" << std::endl;
         return;
@@ -128,7 +127,7 @@ void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, ALLEGRO
     }
 }
 
-void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegments, ALLEGRO_COLOR color, float lineWidth) {
+void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth) {
     for (const LineSegment& segment : lineSegments) {
         DrawLine(segment.GetStartPoint().GetX(), segment.GetStartPoint().GetY(), segment.GetEndPoint().GetX(), segment.GetEndPoint().GetY(), color, lineWidth);
     }
@@ -163,7 +162,6 @@ std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX
         spiralPoints.push_back(newPoint);
         
     }
-
 
     return spiralPoints;
 }

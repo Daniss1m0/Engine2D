@@ -4,8 +4,8 @@
 
 class Point2D {
 private:
-    float x_;
-    float y_;
+    float _x;
+    float _y;
 
 public: 
     Point2D(float x = 0.0f, float y = 0.0f);
