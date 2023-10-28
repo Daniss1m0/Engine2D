@@ -1,6 +1,5 @@
 ﻿#include "engine.h"
 #include "Point2D.h"
-#include "LineSegment.h"
 
 Engine::Engine(int width, int height, float fps) : _screenWidth(width), _screenHeight(height), _FPS(fps) {}
 
