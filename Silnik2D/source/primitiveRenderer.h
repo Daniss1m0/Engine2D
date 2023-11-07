@@ -5,9 +5,26 @@
 #include <iostream>
 #include <vector>
 #include "vector2.h"
-#include "point2D.h"
 
 class PrimitiveRenderer;
+
+class Point2D {
+private:
+    float _x;
+    float _y;
+
+public:
+    Point2D(float x = 0.0f, float y = 0.0f);
+
+    float GetX() const;
+    float GetY() const;
+
+    void SetX(float x);
+    void SetY(float y);
+    void SetPosition(float x, float y);
+
+    // void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize = 1.0f);
+};
 
 class LineSegment {
 private:
@@ -27,6 +44,13 @@ public:
 };
 
 class PrimitiveRenderer {
+private:
+    PrimitiveRenderer();
+    PrimitiveRenderer(const PrimitiveRenderer&) = delete;
+    void operator=(const PrimitiveRenderer&) = delete;
+
+    ALLEGRO_DISPLAY* _display;
+
 public:
     static PrimitiveRenderer& getInstance();
 
@@ -51,11 +75,4 @@ public:
     void DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth);
     std::vector<Point2D> GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength);
     void FlipDisplay();
-
-private:
-    PrimitiveRenderer();
-    PrimitiveRenderer(const PrimitiveRenderer&) = delete;
-    void operator=(const PrimitiveRenderer&) = delete;
-
-    ALLEGRO_DISPLAY* _display;
 };

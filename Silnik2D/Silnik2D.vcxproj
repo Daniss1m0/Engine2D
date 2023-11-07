@@ -163,7 +163,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\point2D.cpp" />
     <ClCompile Include="source\primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -171,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\engine.h" />
-    <ClInclude Include="source\point2D.h" />
     <ClInclude Include="source\primitiveRenderer.h" />
     <ClInclude Include="source\vector2.h" />
   </ItemGroup>

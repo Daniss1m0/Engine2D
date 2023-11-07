@@ -1,5 +1,4 @@
 ﻿#include "engine.h"
-#include "Point2D.h"
 
 Engine::Engine(int width, int height, float fps) : _screenWidth(width), _screenHeight(height), _FPS(fps) {}
 
@@ -61,12 +60,14 @@ void Engine::Run() {
         renderer.ClearScreen();
 
         ALLEGRO_COLOR color = al_map_rgb(255, 255, 255); 
-        /*renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
+        /*
+        renderer.DrawLineIncremental(300.0, 300.0, 400.0, 400.0, color, 10.0);
         renderer.DrawLine(400.0, 400.0, 500.0, 500.0, color, 10.0);
 
         Point2D start(100, 100);
         Point2D end(30, -150);
-        LineSegment line(start, end);*/
+        LineSegment line(start, end);
+        */
 
         renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 404, 2.0f), color, 1.0);
 

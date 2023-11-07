@@ -18,4 +18,3 @@ public:
     void Run();
     void Deinit();
 };
-
