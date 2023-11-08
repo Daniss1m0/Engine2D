@@ -53,10 +53,10 @@ void LineSegment::SetEndPoint(Point2D end)
 void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float thickness, bool additive)
 {
 	if (additive) {
-		renderer.DrawLineIncremental(_start.GetX(), _start.GetY(), _end.GetX(), _end.GetY(), color, thickness);
+		renderer.DrawLineIncremental(_start, _end, color, thickness);
 	}
 	else {
-		renderer.DrawLine(_end.GetX(), _end.GetY(), _end.GetX(), _end.GetY(), color, thickness);
+		renderer.DrawLine(_start, _end, color, thickness);
 	}
 }
 
@@ -79,56 +79,56 @@ void PrimitiveRenderer::ClearScreen() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
-void PrimitiveRenderer::DrawPixel(float x, float y, const ALLEGRO_COLOR& color) {
-    al_draw_pixel(x, y, color);
+void PrimitiveRenderer::DrawPixel(Point2D point, const ALLEGRO_COLOR& color) {
+    al_draw_pixel(point.GetX(), point.GetY(), color);
 }
 
-void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float thickness) {
-    al_draw_line(x1, y1, x2, y2, color, thickness);
+void PrimitiveRenderer::DrawLine(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float thickness) {
+    al_draw_line(start.GetX(), start.GetY(), end.GetX(), end.GetY(), color, thickness);
 }
 
-void PrimitiveRenderer::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
-    al_draw_triangle(x1, y1, x2, y2, x3, y3, color, 1.0f);
+void PrimitiveRenderer::DrawTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color) {
+    al_draw_triangle(point1.GetX(), point1.GetY(), point2.GetX(), point2.GetY(), point3.GetX(), point3.GetY(), color, 1.0f);
 }
 
-void PrimitiveRenderer::DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
-    al_draw_filled_triangle(x1, y1, x2, y2, x3, y3, color);
+void PrimitiveRenderer::DrawFilledTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color) {
+    al_draw_filled_triangle(point1.GetX(), point1.GetY(), point2.GetX(), point2.GetY(), point3.GetX(), point3.GetY(), color);
 }
 
-void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
-    al_draw_rectangle(x, y, x + width, y + height, color, 1.0f);
+void PrimitiveRenderer::DrawRectangle(Point2D point, float width, float height, const ALLEGRO_COLOR& color) {
+    al_draw_rectangle(point.GetX(), point.GetY(), point.GetX() + width, point.GetY() + height, color, 1.0f);
 }
 
-void PrimitiveRenderer::DrawFilledRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
-    al_draw_filled_rectangle(x, y, x + width, y + height, color);
+void PrimitiveRenderer::DrawFilledRectangle(Point2D point, float width, float height, const ALLEGRO_COLOR& color) {
+    al_draw_filled_rectangle(point.GetX(), point.GetY(), point.GetX() + width, point.GetY() + height, color);
 }
 
-void PrimitiveRenderer::DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
-    al_draw_rounded_rectangle(x, y, x + width, y + height, rx, ry, color, 1.0f);
+void PrimitiveRenderer::DrawRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
+    al_draw_rounded_rectangle(point.GetX(), point.GetY(), point.GetX() + width, point.GetY() + height, rx, ry, color, 1.0f);
 }
 
-void PrimitiveRenderer::DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
-    al_draw_filled_rounded_rectangle(x, y, x + width, y + height, rx, ry, color);
+void PrimitiveRenderer::DrawFilledRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
+    al_draw_filled_rounded_rectangle(point.GetX(), point.GetY(), point.GetX() + width, point.GetY() + height, rx, ry, color);
 }
 
-void PrimitiveRenderer::DrawCircle(float x, float y, float radius, const ALLEGRO_COLOR& color) {
-    al_draw_circle(x, y, radius, color, 1.0);
+void PrimitiveRenderer::DrawCircle(Point2D point, float radius, const ALLEGRO_COLOR& color) {
+    al_draw_circle(point.GetX(), point.GetY(), radius, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledCircle(float x, float y, float radius, const ALLEGRO_COLOR& color) {
-    al_draw_filled_circle(x, y, radius, color);
+void PrimitiveRenderer::DrawFilledCircle(Point2D point, float radius, const ALLEGRO_COLOR& color) {
+    al_draw_filled_circle(point.GetX(), point.GetY(), radius, color);
 }
 
-void PrimitiveRenderer::DrawEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color) {
-    al_draw_ellipse(cx, cy, rx, ry, color, 1.0);
+void PrimitiveRenderer::DrawEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color) {
+    al_draw_ellipse(point.GetX(), point.GetY(), rx, ry, color, 1.0);
 }
 
-void PrimitiveRenderer::DrawFilledEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color) {
-    al_draw_filled_ellipse(cx, cy, rx, ry, color);
+void PrimitiveRenderer::DrawFilledEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color) {
+    al_draw_filled_ellipse(point.GetX(), point.GetY(), rx, ry, color);
 }
 
-void PrimitiveRenderer::DrawArc(float cx, float cy, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color) {
-    al_draw_arc(cx, cy, r, start_theta, end_theta, color, 1.0f);
+void PrimitiveRenderer::DrawArc(Point2D point, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color) {
+    al_draw_arc(point.GetX(), point.GetY(), r, start_theta, end_theta, color, 1.0f);
 }
 
 void PrimitiveRenderer::FlipDisplay() {
@@ -137,17 +137,17 @@ void PrimitiveRenderer::FlipDisplay() {
     }
 }
 
-void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float lineWidth) {
-    float dx = fabs(x2 - x1);
-    float dy = fabs(y2 - y1);
-    float x = x1;
-    float y = y1;
-    float sx = (x1 < x2) ? 1.0f : -1.0f;
-    float sy = (y1 < y2) ? 1.0f : -1.0f;
+void PrimitiveRenderer::DrawLineIncremental(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float lineWidth) {
+    float dx = fabs(end.GetX() - start.GetX());
+    float dy = fabs(end.GetY() - start.GetY());
+    float x = start.GetX();
+    float y = start.GetY();
+    float sx = (start.GetX() < end.GetX()) ? 1.0f : -1.0f;
+    float sy = (start.GetY() < end.GetY()) ? 1.0f : -1.0f;
 
     if (dx > dy) {
         float error = dx / 2.0f;
-        while (x != x2) {
+        while (x != end.GetX()) {
             for (float i = -lineWidth / 2.0f; i < lineWidth / 2.0f; i += 1.0f) {
                 al_draw_pixel(x, y + i, color);
             }
@@ -161,7 +161,7 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
     } 
     else {
         float error = dy / 2.0f;
-        while (y != y2) {
+        while (y != end.GetX()) {
             for (float i = -lineWidth / 2.0f; i < lineWidth / 2.0f; i += 1.0f) {
                 al_draw_pixel(x + i, y, color);
             }
@@ -175,7 +175,6 @@ void PrimitiveRenderer::DrawLineIncremental(float x1, float y1, float x2, float 
     }
 }
 
-
 void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float lineWidth) {
     if (points.size() < 2) {
         std::cout << "linia lamana musi miec wiecej niz 1 punkt" << std::endl;
@@ -183,13 +182,13 @@ void PrimitiveRenderer::DrawPolyline(const std::vector<Point2D>& points, const A
     }
 
     for (size_t i = 0; i < points.size() - 1; ++i) {
-        DrawLine(points[i].GetX(), points[i].GetY(), points[i + 1].GetX(), points[i + 1].GetY(), color, lineWidth);
+        DrawLine(points[i], points[i + 1], color, lineWidth);
     }
 }
 
 void PrimitiveRenderer::DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth) {
     for (const LineSegment& segment : lineSegments) {
-        DrawLine(segment.GetStartPoint().GetX(), segment.GetStartPoint().GetY(), segment.GetEndPoint().GetX(), segment.GetEndPoint().GetY(), color, lineWidth);
+        DrawLine(segment.GetStartPoint(), segment.GetEndPoint(), color, lineWidth);
     }
 }
 

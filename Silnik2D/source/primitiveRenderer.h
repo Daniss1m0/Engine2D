@@ -57,20 +57,21 @@ public:
     void Initialize(ALLEGRO_DISPLAY* display);
 
     void ClearScreen();
-    void DrawPixel(float x, float y, const const ALLEGRO_COLOR& color);
-    void DrawLine(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float thickness);
-    void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color);
-    void DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color);
-    void DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color);
-    void DrawFilledRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color);
-    void DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
-    void DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
-    void DrawCircle(float x, float y, float radius, const ALLEGRO_COLOR& color);
-    void DrawFilledCircle(float x, float y, float radius, const ALLEGRO_COLOR& color);
-    void DrawEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color);
-    void DrawFilledEllipse(float cx, float cy, float rx, float ry, const ALLEGRO_COLOR& color);
-    void DrawArc(float cx, float cy, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color);
-    void DrawLineIncremental(float x1, float y1, float x2, float y2, const ALLEGRO_COLOR& color, float lineWidth);
+    void DrawPixel(Point2D point, const const ALLEGRO_COLOR& color);
+    void DrawLine(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float thickness);
+    void DrawLineIncremental(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float lineWidth);
+    void DrawTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color);
+    void DrawFilledTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color);
+    void DrawRectangle(Point2D point, float width, float height, const ALLEGRO_COLOR& color);
+    void DrawFilledRectangle(Point2D point, float width, float height, const ALLEGRO_COLOR& color);
+    void DrawRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
+    void DrawFilledRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
+    void DrawCircle(Point2D point, float radius, const ALLEGRO_COLOR& color);
+    void DrawFilledCircle(Point2D point, float radius, const ALLEGRO_COLOR& color);
+    void DrawEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color);
+    void DrawFilledEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color);
+    void DrawArc(Point2D point, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color);
+   
     void DrawPolyline(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth);
     std::vector<Point2D> GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength);
