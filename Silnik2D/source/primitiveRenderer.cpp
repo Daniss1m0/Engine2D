@@ -88,7 +88,7 @@ void PrimitiveRenderer::DrawLine(float x1, float y1, float x2, float y2, const A
 }
 
 void PrimitiveRenderer::DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
-    al_draw_triangle(x1, y1, x2, y2, x3, y3, color, 1.0);
+    al_draw_triangle(x1, y1, x2, y2, x3, y3, color, 1.0f);
 }
 
 void PrimitiveRenderer::DrawFilledTriangle(float x1, float y1, float x2, float y2, float x3, float y3, const ALLEGRO_COLOR& color) {
@@ -96,7 +96,7 @@ void PrimitiveRenderer::DrawFilledTriangle(float x1, float y1, float x2, float y
 }
 
 void PrimitiveRenderer::DrawRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
-    al_draw_rectangle(x, y, x + width, y + height, color, 1.0);
+    al_draw_rectangle(x, y, x + width, y + height, color, 1.0f);
 }
 
 void PrimitiveRenderer::DrawFilledRectangle(float x, float y, float width, float height, const ALLEGRO_COLOR& color) {
@@ -104,7 +104,7 @@ void PrimitiveRenderer::DrawFilledRectangle(float x, float y, float width, float
 }
 
 void PrimitiveRenderer::DrawRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
-    al_draw_rounded_rectangle(x, y, x + width, y + height, rx, ry, color, 1.0);
+    al_draw_rounded_rectangle(x, y, x + width, y + height, rx, ry, color, 1.0f);
 }
 
 void PrimitiveRenderer::DrawFilledRoundedRectangle(float x, float y, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color) {
@@ -128,7 +128,7 @@ void PrimitiveRenderer::DrawFilledEllipse(float cx, float cy, float rx, float ry
 }
 
 void PrimitiveRenderer::DrawArc(float cx, float cy, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color) {
-    al_draw_arc(cx, cy, r, start_theta, end_theta, color, 1.0);
+    al_draw_arc(cx, cy, r, start_theta, end_theta, color, 1.0f);
 }
 
 void PrimitiveRenderer::FlipDisplay() {
@@ -202,7 +202,7 @@ std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX
     x = x + sideLength;
     spiralPoints.push_back(Point2D(x,y));
 
-    Vector2 lastVector(sideLength, 0.0);
+    Vector2 lastVector(sideLength, 0.0f);
     int i = 0;
     for (i = 0; i < numTurns; i++) {
        
