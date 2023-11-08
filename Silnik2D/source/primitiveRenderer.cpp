@@ -50,13 +50,13 @@ void LineSegment::SetEndPoint(Point2D end)
 	_end = end;
 }
 
-void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float grubosc, bool additive)
+void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float thickness, bool additive)
 {
 	if (additive) {
-		renderer.DrawLineIncremental(_start.GetX(), _start.GetY(), _end.GetX(), _end.GetY(), color, grubosc);
+		renderer.DrawLineIncremental(_start.GetX(), _start.GetY(), _end.GetX(), _end.GetY(), color, thickness);
 	}
 	else {
-		renderer.DrawLine(_end.GetX(), _end.GetY(), _end.GetX(), _end.GetY(), color, grubosc);
+		renderer.DrawLine(_end.GetX(), _end.GetY(), _end.GetX(), _end.GetY(), color, thickness);
 	}
 }
 
