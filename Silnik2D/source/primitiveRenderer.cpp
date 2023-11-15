@@ -1,4 +1,5 @@
 ﻿#include "PrimitiveRenderer.h"
+#define M_PI 3.14159265358979323846
 
 Point2D::Point2D(float x, float y) : _x(x), _y(y) {
 }
@@ -115,12 +116,44 @@ void PrimitiveRenderer::DrawCircle(Point2D point, float radius, const ALLEGRO_CO
     al_draw_circle(point.GetX(), point.GetY(), radius, color, 1.0);
 }
 
+void PrimitiveRenderer::DrawCircleSymmetry4(Point2D p, float radius, ALLEGRO_COLOR color) {
+    float x, y;
+
+    for (float alpha = 0; alpha <= M_PI / 2; alpha += 0.01) {
+        x = radius * cos(alpha);
+        y = radius * sin(alpha);
+
+        al_draw_pixel(p.GetX() + x, p.GetY() + y, color);
+
+        al_draw_pixel(p.GetX() + x, p.GetY() - y, color);
+
+        al_draw_pixel(p.GetX() - x, p.GetY() + y, color);
+        al_draw_pixel(p.GetX() - x, p.GetY() - y, color);
+    }
+}
+
 void PrimitiveRenderer::DrawFilledCircle(Point2D point, float radius, const ALLEGRO_COLOR& color) {
     al_draw_filled_circle(point.GetX(), point.GetY(), radius, color);
 }
 
 void PrimitiveRenderer::DrawEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color) {
     al_draw_ellipse(point.GetX(), point.GetY(), rx, ry, color, 1.0);
+}
+
+void PrimitiveRenderer::DrawEllipseSymmetry4(Point2D p, float rx, float ry, const ALLEGRO_COLOR& color) {
+    float x, y;
+
+    for (float alpha = 0; alpha <= M_PI / 2; alpha += 0.01) {
+        x = rx * cos(alpha);
+        y = ry * sin(alpha);
+
+        al_draw_pixel(p.GetX() + x, p.GetY() + y, color);
+
+        al_draw_pixel(p.GetX() + x, p.GetY() - y, color);
+
+        al_draw_pixel(p.GetX() - x, p.GetY() + y, color);
+        al_draw_pixel(p.GetX() - x, p.GetY() - y, color);
+    }
 }
 
 void PrimitiveRenderer::DrawFilledEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color) {
@@ -130,6 +163,21 @@ void PrimitiveRenderer::DrawFilledEllipse(Point2D point, float rx, float ry, con
 void PrimitiveRenderer::DrawArc(Point2D point, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color) {
     al_draw_arc(point.GetX(), point.GetY(), r, start_theta, end_theta, color, 1.0f);
 }
+
+void PrimitiveRenderer::DrawClosedPolygon(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float thickness) {
+    size_t numPoints = points.size();
+
+    if (numPoints < 3) {
+        std::cerr << "Nie udało się zrobić wielokąta." << std::endl;
+        return;
+    }
+
+    for (size_t i = 0; i < numPoints - 1; ++i) {
+        DrawLine(points[i], points[i + 1], color, thickness);
+    }
+    DrawLine(points.back(), points.front(), color, thickness);
+}
+
 
 void PrimitiveRenderer::FlipDisplay() {
     if (_display) {
@@ -223,4 +271,56 @@ std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX
     }
 
     return spiralPoints;
+}
+
+void PrimitiveRenderer::boundaryFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& boundaryColor) {
+    ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), point.GetX(), point.GetY());
+
+    if (colorsAreEqual(currentColor, fillColor) || colorsAreEqual(currentColor, boundaryColor)) {
+        return;
+    }
+
+    al_put_pixel(point.GetX(), point.GetY(), fillColor);
+
+    boundaryFill(Point2D(point.GetX() + 1, point.GetY()), fillColor, boundaryColor);
+    boundaryFill(Point2D(point.GetX() - 1, point.GetY()), fillColor, boundaryColor);
+    boundaryFill(Point2D(point.GetX(), point.GetY() + 1), fillColor, boundaryColor);
+    boundaryFill(Point2D(point.GetX(), point.GetY() - 1), fillColor, boundaryColor);
+}
+
+void PrimitiveRenderer::floodFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor) {
+    ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), point.GetX(), point.GetY());
+
+    if (colorsAreEqual(currentColor, fillColor) || !colorsAreEqual(currentColor, backgroundColor)) {
+        return;
+    }
+
+    al_put_pixel(point.GetX(), point.GetY(), fillColor);
+
+    std::stack<Point2D> pixelsToCheck;
+    pixelsToCheck.push(Point2D(point.GetX(), point.GetY()));
+
+    while (!pixelsToCheck.empty()) {
+        int currentX = pixelsToCheck.top().GetX();
+        int currentY = pixelsToCheck.top().GetY();
+        pixelsToCheck.pop();
+
+        checkAndAddPixel(pixelsToCheck, Point2D(currentX + 1, currentY), fillColor, backgroundColor);
+        checkAndAddPixel(pixelsToCheck, Point2D(currentX - 1, currentY), fillColor, backgroundColor);
+        checkAndAddPixel(pixelsToCheck, Point2D(currentX, currentY + 1), fillColor, backgroundColor);
+        checkAndAddPixel(pixelsToCheck, Point2D(currentX, currentY - 1), fillColor, backgroundColor);
+    }
+}
+
+bool PrimitiveRenderer::colorsAreEqual(const ALLEGRO_COLOR& color1, const ALLEGRO_COLOR& color2) {
+    return color1.r == color2.r && color1.g == color2.g && color1.b == color2.b && color1.a == color2.a;
+}
+
+void PrimitiveRenderer::checkAndAddPixel(std::stack<Point2D>& pixelsToCheck, const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor) {
+    ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), point.GetX(), point.GetY());
+
+    if (colorsAreEqual(currentColor, backgroundColor)) {
+        al_put_pixel(point.GetX(), point.GetY(), fillColor);
+        pixelsToCheck.push(point);
+    }
 }

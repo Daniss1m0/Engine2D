@@ -65,18 +65,22 @@ void Engine::Run() {
         Point2D end(30, -150);
 
         LineSegment line(start, end);
-        line.Draw(renderer, color, 1.0f, true);
 
-        //renderer.DrawLineIncremental(start, end, color, 10.0);
-        //renderer.DrawLine(start, end, color, 10.0);
-
-        Point2D point1(700.0f, 300.0f);
+        Point2D point1(100.0f, 100.0f);
         //renderer.DrawPixel(point1, color);
 
-        Point2D point2(800.0f, 300.0f);
-        //renderer.DrawPixel(point2, color);
+        Point2D point2(300.0f, 300.0f);
+        std::vector<Point2D> Pointy;
+        Pointy.push_back(point1);
+        Pointy.push_back(point2);
+        Pointy.push_back(Point2D(50.0f, 100.0f));
+        //Pointy.push_back(Point2D(10.0f, 10.0f));
+        //renderer.DrawClosedPolygon(Pointy, color, 1.0f);
+        renderer.DrawRectangle(point1, 200.0f, 200.0f, color);
+        //renderer.floodFill(Point2D(150.0f, 150.0f), al_map_rgb(255, 0, 0), al_map_rgb(255, 255, 255));
+        renderer.DrawPixel(point1, color);
 
-        renderer.DrawLine(point1, point2, color, 5.0);
+        //renderer.DrawLine(point1, point2, color, 5.0);
         //renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 404, 2.0f), color, 1.0);
 
         renderer.FlipDisplay();

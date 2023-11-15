@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "vector2.h"
+#include <stack> // dla wypelniania obszaru kolorem
 
 class PrimitiveRenderer;
 
@@ -57,7 +58,7 @@ public:
     void Initialize(ALLEGRO_DISPLAY* display);
 
     void ClearScreen();
-    void DrawPixel(Point2D point, const const ALLEGRO_COLOR& color);
+    void DrawPixel(Point2D point, const ALLEGRO_COLOR& color);
     void DrawLine(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float thickness);
     void DrawLineIncremental(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color);
@@ -67,13 +68,22 @@ public:
     void DrawRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
     void DrawFilledRoundedRectangle(Point2D point, float width, float height, float rx, float ry, const ALLEGRO_COLOR& color);
     void DrawCircle(Point2D point, float radius, const ALLEGRO_COLOR& color);
+    void DrawCircleSymmetry4(Point2D p, float radius, ALLEGRO_COLOR color);
     void DrawFilledCircle(Point2D point, float radius, const ALLEGRO_COLOR& color);
     void DrawEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color);
+    void DrawEllipseSymmetry4(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color);
     void DrawFilledEllipse(Point2D point, float rx, float ry, const ALLEGRO_COLOR& color);
     void DrawArc(Point2D point, float r, float start_theta, float end_theta, const ALLEGRO_COLOR& color);
-   
+    void DrawClosedPolygon(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float thickness);
+
     void DrawPolyline(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth);
     std::vector<Point2D> GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength);
+
+    void boundaryFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& boundaryColor);
+    void floodFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor);
+    bool colorsAreEqual(const ALLEGRO_COLOR& color1, const ALLEGRO_COLOR& color2);
+    void checkAndAddPixel(std::stack<Point2D>& pixelsToCheck, const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor);
+
     void FlipDisplay();
 };
