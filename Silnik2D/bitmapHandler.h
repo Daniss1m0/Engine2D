@@ -11,10 +11,10 @@ private:
 public:
     BitmapHandler();
     ~BitmapHandler();
+    int GetWidth() const;
+    int GetHeight() const;
     bool LoadFromFile(const char* filename);
     bool SaveToFile(const char* filename);
     void CopyFrom(const BitmapHandler& source);
-    int GetWidth() const;
-    int GetHeight() const;
-    void Draw(float x, float y);
+    void Draw(float x, float y, float width, float height);
 };

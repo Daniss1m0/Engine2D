@@ -13,6 +13,14 @@ BitmapHandler::~BitmapHandler() {
 	}
 }
 
+int BitmapHandler::GetWidth() const {
+	return al_get_bitmap_width(bitmap);
+}
+
+int BitmapHandler::GetHeight() const {
+	return al_get_bitmap_height(bitmap);
+}
+
 bool BitmapHandler::LoadFromFile(const char* filename) {
 	ALLEGRO_BITMAP* loadedBitmap = al_load_bitmap(filename);
 	if (loadedBitmap) {
@@ -38,7 +46,7 @@ bool BitmapHandler::SaveToFile(const char* filename) {
 	}
 }
 
-void BitmapHandler::CopyFrom(const BitmapHandler& source) {
+void BitmapHandler::CopyFrom(const BitmapHandler& source) { //
 	if (source.bitmap) {
 		al_set_target_bitmap(bitmap);
 		al_draw_bitmap(source.bitmap, 0, 0, 0);
@@ -49,17 +57,10 @@ void BitmapHandler::CopyFrom(const BitmapHandler& source) {
 	}
 }
 
-int BitmapHandler::GetWidth() const {
-	return al_get_bitmap_width(bitmap);
-}
 
-int BitmapHandler::GetHeight() const {
-	return al_get_bitmap_height(bitmap);
-}
-
-void BitmapHandler::Draw(float x, float y) {
+void BitmapHandler::Draw(float x, float y, float width, float height) {
 	if (bitmap) {
-		al_draw_scaled_bitmap(bitmap, x, y, al_get_bitmap_width(bitmap), al_get_bitmap_height(bitmap), 0, 0, 100, 100, 0);
+		al_draw_scaled_bitmap(bitmap, 0, 0, al_get_bitmap_width(bitmap), al_get_bitmap_height(bitmap),x, y, width, height, 0);
 	}
 	else {
 		std::cerr << "Cannot draw. Bitmap is not initialized." << std::endl;

@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bitmapHandler.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="source\primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapHandler.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="source\engine.h" />
     <ClInclude Include="source\primitiveRenderer.h" />
     <ClInclude Include="source\vector2.h" />

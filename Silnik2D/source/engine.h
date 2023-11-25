@@ -1,8 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "PrimitiveRenderer.h"
-#include "bitmapHandler.h"
+#include <game.h>
 
 class Engine {
 private:

@@ -39,7 +39,7 @@ void Engine::Run() {
     PrimitiveRenderer& renderer = PrimitiveRenderer::getInstance();
     renderer.Initialize(_display);
 
-    BitmapHandler bitmap;
+    BitmapHandler bitmap, bitmap2;
     bitmap.LoadFromFile("example.png");
 
     while (running) {
@@ -71,7 +71,7 @@ void Engine::Run() {
         Point2D point1(100.0f, 100.0f);
         Point2D point2(300.0f, 300.0f);
 
-        bitmap.Draw(10,10);
+        bitmap.Draw(100,100,200,200);
 
         //renderer.DrawPixel(point1, color);
         //renderer.DrawLine(point1, point2, color, 5.0);
