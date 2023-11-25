@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "PrimitiveRenderer.h"
+#include "bitmapHandler.h"
 
 class Engine {
 private:

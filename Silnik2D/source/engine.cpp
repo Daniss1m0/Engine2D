@@ -1,4 +1,6 @@
-﻿#include "engine.h"
+﻿//zrobic hierarchi klass (np. jak w instrukcji 4 pierwsze zadanie)
+
+#include "engine.h"
 
 Engine::Engine(int width, int height, float fps) : _screenWidth(width), _screenHeight(height), _FPS(fps) {}
 
@@ -10,6 +12,8 @@ bool Engine::Init() {
 
     al_install_keyboard();
     al_install_mouse();
+
+    al_init_image_addon(); //
 
     _display = al_create_display(_screenWidth, _screenHeight);
     if (!_display) {
@@ -34,7 +38,10 @@ void Engine::Run() {
 
     PrimitiveRenderer& renderer = PrimitiveRenderer::getInstance();
     renderer.Initialize(_display);
-    
+
+    BitmapHandler bitmap;
+    bitmap.LoadFromFile("example.png");
+
     while (running) {
         ALLEGRO_EVENT event;
         al_wait_for_event(_eventQueue, &event);
@@ -61,25 +68,12 @@ void Engine::Run() {
 
         ALLEGRO_COLOR color = al_map_rgb(255, 255, 255);
 
-        Point2D start(100, 300);
-        Point2D end(30, -150);
-
-        LineSegment line(start, end);
-
         Point2D point1(100.0f, 100.0f);
-        //renderer.DrawPixel(point1, color);
-
         Point2D point2(300.0f, 300.0f);
-        std::vector<Point2D> Pointy;
-        Pointy.push_back(point1);
-        Pointy.push_back(point2);
-        Pointy.push_back(Point2D(50.0f, 100.0f));
-        //Pointy.push_back(Point2D(10.0f, 10.0f));
-        //renderer.DrawClosedPolygon(Pointy, color, 1.0f);
-        renderer.DrawRectangle(point1, 200.0f, 200.0f, color);
-        //renderer.floodFill(Point2D(150.0f, 150.0f), al_map_rgb(255, 0, 0), al_map_rgb(255, 255, 255));
-        renderer.DrawPixel(point1, color);
 
+        bitmap.Draw(10,10);
+
+        //renderer.DrawPixel(point1, color);
         //renderer.DrawLine(point1, point2, color, 5.0);
         //renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 404, 2.0f), color, 1.0);
 

@@ -58,7 +58,7 @@ public:
     void Initialize(ALLEGRO_DISPLAY* display);
 
     void ClearScreen();
-    void DrawPixel(Point2D point, const ALLEGRO_COLOR& color);
+    void DrawPixel(Point2D point, const ALLEGRO_COLOR& color); //dziedziczenie???
     void DrawLine(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float thickness);
     void DrawLineIncremental(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color);
@@ -79,9 +79,9 @@ public:
     void DrawPolyline(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawPolyline(const std::vector<LineSegment>& lineSegments, const ALLEGRO_COLOR& color, float lineWidth);
     std::vector<Point2D> GenerateSquareSpiralPoints(float centerX, float centerY, int numTurns, float sideLength);
-
-    void boundaryFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& boundaryColor);
-    void floodFill(const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor);
+    //stosowac funkcji wypelniania obszaru kolorem tylko dla malych prymitywow
+    void boundaryFill(int x, int y, const ALLEGRO_COLOR& fill_color, const ALLEGRO_COLOR& boundary_color);
+    void floodFill(int x, int y, const ALLEGRO_COLOR& fill_color, const ALLEGRO_COLOR& background_color);
     bool colorsAreEqual(const ALLEGRO_COLOR& color1, const ALLEGRO_COLOR& color2);
     void checkAndAddPixel(std::stack<Point2D>& pixelsToCheck, const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor);
 
