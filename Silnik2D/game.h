@@ -20,6 +20,8 @@ namespace game
 		DrawableObject() = default;
 
 		virtual void Draw() = 0;
+		
+		bool LoadFromFile(const char* filename);
 
 	protected:
 		BitmapHandler _handler;
