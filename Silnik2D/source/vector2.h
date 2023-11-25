@@ -16,8 +16,24 @@ public:
         return Vector2(x * other.x, y * other.y);
     }
 
+	Vector2 operator+(const Vector2& other) {
+		return Vector2(x + other.x, y + other.y);
+	}
+
     Vector2 operator*(float other) {
         return Vector2(x * other, y * other);
     }
+
+	Vector2 operator+(float other) {
+		return Vector2(x + other, y + other);
+	}
+
+	Vector2 operator+=(float other) {
+		return operator+(other);
+	}
+
+	Vector2 operator+=(const Vector2& other) {
+		return operator+(other);
+	}
 
 };

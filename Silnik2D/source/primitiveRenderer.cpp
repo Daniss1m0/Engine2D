@@ -51,8 +51,7 @@ void LineSegment::SetEndPoint(Point2D end)
 	_end = end;
 }
 
-void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float thickness, bool additive)
-{
+void LineSegment::Draw(PrimitiveRenderer& renderer, const ALLEGRO_COLOR& color, float thickness, bool additive) {
 	if (additive) {
 		renderer.DrawLineIncremental(_start, _end, color, thickness);
 	}
