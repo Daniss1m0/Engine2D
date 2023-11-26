@@ -39,8 +39,8 @@ void Engine::Run() {
     PrimitiveRenderer& renderer = PrimitiveRenderer::getInstance();
     renderer.Initialize(_display);
 
-    BitmapHandler bitmap, bitmap2;
-    bitmap.LoadFromFile("example.png");
+    game::Player ply;
+    ply.LoadFromFile("example.png");
 
     while (running) {
         ALLEGRO_EVENT event;
@@ -65,18 +65,7 @@ void Engine::Run() {
             }
         }
         renderer.ClearScreen();
-
-        ALLEGRO_COLOR color = al_map_rgb(255, 255, 255);
-
-        Point2D point1(100.0f, 100.0f);
-        Point2D point2(300.0f, 300.0f);
-
-        bitmap.Draw(100,100,200,200);
-
-        //renderer.DrawPixel(point1, color);
-        //renderer.DrawLine(point1, point2, color, 5.0);
-        //renderer.DrawPolyline(renderer.GenerateSquareSpiralPoints(400.0f, 300.0f, 404, 2.0f), color, 1.0);
-
+        ply.Draw();
         renderer.FlipDisplay();
     }
 }

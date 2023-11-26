@@ -27,10 +27,10 @@
     <ClCompile Include="source\vector2.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="bitmapHandler.cpp">
+    <ClCompile Include="source\bitmapHandler.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
+    <ClCompile Include="source\game.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="source\vector2.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="bitmapHandler.h">
+    <ClInclude Include="source\bitmapHandler.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
+    <ClInclude Include="source\game.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "source/PrimitiveRenderer.h"
-#include "source/vector2.h"
+#include "vector2.h"
 #include "bitmapHandler.h"
 
 namespace game

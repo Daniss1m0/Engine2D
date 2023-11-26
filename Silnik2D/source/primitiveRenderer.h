@@ -4,8 +4,8 @@
 #include <allegro5/allegro.h>
 #include <iostream>
 #include <vector>
+#include <stack>
 #include "vector2.h"
-#include <stack> // dla wypelniania obszaru kolorem
 
 class PrimitiveRenderer;
 

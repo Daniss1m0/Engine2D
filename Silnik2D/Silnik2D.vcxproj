@@ -163,16 +163,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitmapHandler.cpp" />
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="source\bitmapHandler.cpp" />
+    <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\primitiveRenderer.cpp" />
     <ClCompile Include="source\engine.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bitmapHandler.h" />
-    <ClInclude Include="game.h" />
+    <ClInclude Include="source\bitmapHandler.h" />
+    <ClInclude Include="source\game.h" />
     <ClInclude Include="source\engine.h" />
     <ClInclude Include="source\primitiveRenderer.h" />
     <ClInclude Include="source\vector2.h" />
