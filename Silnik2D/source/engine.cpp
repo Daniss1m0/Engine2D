@@ -68,7 +68,7 @@ void Engine::Run() {
        
             case ALLEGRO_EVENT_TIMER: {
                 ply.SetOrientation(i);
-                polygon.Rotate(i);
+                polygon.Rotate(6);
                 polygon.Scale(scale);
                 i += 0.1;
                 if (up == true)
