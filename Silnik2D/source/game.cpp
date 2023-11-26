@@ -14,12 +14,12 @@ namespace game
 
 	void Player::Draw()
 	{
-		_handler.Draw(_pos.x, _pos.y, _handler.GetWidth(), _handler.GetHeight());
+		_handler.Draw(_pos.x, _pos.y, _orientation,_scale);
 	}
 
 	void Player::Move(const Vector2& vec)
 	{
-		_pos += vec;
+		_pos =_pos+ vec;
 	}
 
 	bool DrawableObject::LoadFromFile(const char* filename)
@@ -29,7 +29,17 @@ namespace game
 
 	void DrawableObject::Draw()
 	{
-		_handler.Draw(_pos.x, _pos.y, _handler.GetWidth(), _handler.GetHeight());
+		_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
+	}
+
+	void DrawableObject::SetOrientation(float orientation)
+	{
+		_orientation = orientation;
+	}
+
+	void DrawableObject::SetScale(float scale)
+	{
+		_scale = scale;
 	}
 
 	void GeometryObject::Draw()
@@ -57,6 +67,7 @@ namespace game
 
 	void TransformableObject::Rotate(float degrees)
 	{
+		_orientation = degrees;
 		for (Point2D& point : _polygon)
 		{
 			RotatePoint(point, degrees);
@@ -87,4 +98,41 @@ namespace game
 
 	}
 
+	void Polygon::Draw()
+	{
+		renderer.DrawClosedPolygon(_points, _color, _thickness);
+	}
+
+	void Polygon::Rotate(float degrees)
+	{
+		_orientation = degrees;
+		for (Point2D& point : _polygon)
+		{
+			RotatePoint(point, degrees);
+		}
+
+		int i = 0;
+		for (Point2D& point : _polygon) {
+			_points[i] = point + _pos;
+			i++;
+		}
+	}
+
+	void Polygon::Scale(float scale)
+	{
+		float scaleMultiplier = scale / _scale;
+		_scale = scale;
+
+		for (Point2D& point : _polygon)
+		{
+			point = point * scaleMultiplier;
+		}
+
+		int i = 0;
+		for (Point2D& point : _polygon) {
+			_points[i] = point + _pos;
+			i++;
+		}
+
+	}
 }

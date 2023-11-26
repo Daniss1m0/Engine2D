@@ -58,9 +58,9 @@ void BitmapHandler::CopyFrom(const BitmapHandler& source) { //
 }
 
 
-void BitmapHandler::Draw(float x, float y, float width, float height) {
+void BitmapHandler::Draw(float x, float y, float angle ,float scale) {
 	if (bitmap) {
-		al_draw_scaled_bitmap(bitmap, 0, 0, al_get_bitmap_width(bitmap), al_get_bitmap_height(bitmap),x, y, width, height, 0);
+		al_draw_scaled_rotated_bitmap(bitmap, al_get_bitmap_width(bitmap)/2.0, al_get_bitmap_height(bitmap)/2.0, x, y,scale, scale, angle, 0);
 	}
 	else {
 		std::cerr << "Cannot draw. Bitmap is not initialized." << std::endl;

@@ -41,6 +41,20 @@ void Engine::Run() {
 
     game::Player ply;
     ply.LoadFromFile("example.png");
+    ply.SetScale(0.1);
+    ply.Move(Vector2(150.0,300.0));
+    float i = 0.0;
+
+    std::vector<Point2D> polygonPoints;
+    polygonPoints.push_back(Point2D(-100.0, 100.0));
+    polygonPoints.push_back(Point2D(100.0, 100.0));
+    polygonPoints.push_back(Point2D(100.0, -100.0));
+    polygonPoints.push_back(Point2D(-100.0, -100.0));
+
+    game::Polygon polygon(Vector2(650.0, 300),polygonPoints);
+    polygon.SetThickness(10.0);
+    float scale = 1.0;
+    bool up = true;
 
     while (running) {
         ALLEGRO_EVENT event;
@@ -53,6 +67,23 @@ void Engine::Run() {
             }
        
             case ALLEGRO_EVENT_TIMER: {
+                ply.SetOrientation(i);
+                polygon.Rotate(i);
+                polygon.Scale(scale);
+                i += 0.1;
+                if (up == true)
+                {
+                    scale += 0.01;
+                    if(scale > 2.0)
+                        up = false;
+                }
+                else
+                {
+                    scale -= 0.01;
+                    if(scale < 0.5)
+                        up = true;
+                }
+             
                 break;
             }
 
@@ -66,6 +97,7 @@ void Engine::Run() {
         }
         renderer.ClearScreen();
         ply.Draw();
+        polygon.Draw();
         renderer.FlipDisplay();
     }
 }

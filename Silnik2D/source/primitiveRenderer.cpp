@@ -165,7 +165,7 @@ void PrimitiveRenderer::DrawArc(Point2D point, float r, float start_theta, float
 
 void PrimitiveRenderer::DrawClosedPolygon(const std::vector<Point2D>& points, const ALLEGRO_COLOR& color, float thickness) {
     size_t numPoints = points.size();
-
+    //std::cout << numPoints << std::endl;
     if (numPoints < 3) {
         std::cerr << "Nie udało się zrobić wielokąta." << std::endl;
         return;

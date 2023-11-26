@@ -22,12 +22,16 @@ namespace game
 		DrawableObject() = default;
 
 		virtual void Draw() = 0;
+		void SetOrientation(float degrees);
+		void SetScale(float scale);
 
 		bool LoadFromFile(const char* filename);
 
 	protected:
 		BitmapHandler _handler;
 		Vector2 _pos = { 0.0f, 0.0f };
+		float _scale=1;
+		float _orientation=0;
 	};
 
 
@@ -41,15 +45,12 @@ namespace game
 			_pos = pos;
 			_polygon = polygon;
 
-			int i = 0;
 			for (Point2D& point : polygon) {
-				_points[i] = point + _pos;
-				i++;
+				_points.push_back(point + _pos);
 			}
-
 		}
 
-		virtual void Draw() = 0;
+		void Draw();
 		void SetThickness(float thickness);
 		void SetColor(ALLEGRO_COLOR color);
 
@@ -62,7 +63,7 @@ namespace game
 	};
 
 
-	class TransformableObject : public DrawableObject
+	class TransformableObject : virtual public GameObject
 	{
 	public:
 		TransformableObject() = default;
@@ -78,7 +79,7 @@ namespace game
 			}
 		}
 
-		virtual void Move(const Vector2&) = 0;
+		void Move(const Vector2&);
 		void Rotate(float degrees);
 		void Scale(float scaleNumber);
 
@@ -92,13 +93,40 @@ namespace game
 		//ALLEGRO_COLOR _color = al_map_rgb(100, 100, 100);
 	};
 
-	class Player : public TransformableObject
+	class Player : public DrawableObject
 	{
 	public:
 		Player() = default;
 
-		virtual void Draw();
-		virtual void Move(const Vector2& vec);
+		void Draw();
+		void Move(const Vector2& vec);
+	};
+
+	class Polygon :public GeometryObject, public TransformableObject
+	{
+	public:
+		Polygon() = default;
+
+		Polygon(Vector2 pos, std::vector<Point2D>& polygon)
+		{
+			_pos = pos;
+			_polygon = polygon;
+			_scale = 1;
+
+			for (Point2D& point : polygon) {
+				_points.push_back(point + _pos);
+			}
+		}
+		void Draw();
+		void Rotate(float degrees);
+		void Scale(float scaleNumber);
+
+	protected:
+		Vector2 _pos = { 0.0f, 0.0f };
+		std::vector<Point2D> _points;
+		std::vector<Point2D> _polygon;
+		float _scale = 1;
+		float _orientation = 0;
 	};
 
 }
