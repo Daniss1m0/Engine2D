@@ -24,6 +24,16 @@ public:
     void SetY(float y);
     void SetPosition(float x, float y);
 
+    Point2D operator+(const Vector2& other)
+    {
+        return Point2D(_x + other.x, _y + other.y);
+    }
+
+    Point2D operator*(float number)
+    {
+        return Point2D(_x * number, _y * number);
+    }
+
     // void Draw(PrimitiveRenderer& renderer, ALLEGRO_COLOR color, float pointSize = 1.0f);
 };
 

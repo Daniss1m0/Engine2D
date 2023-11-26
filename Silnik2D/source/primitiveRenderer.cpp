@@ -177,7 +177,6 @@ void PrimitiveRenderer::DrawClosedPolygon(const std::vector<Point2D>& points, co
     DrawLine(points.back(), points.front(), color, thickness);
 }
 
-
 void PrimitiveRenderer::FlipDisplay() {
     if (_display) {
         al_flip_display();
