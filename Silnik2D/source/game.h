@@ -16,7 +16,7 @@ namespace game
 	};
 
 
-	class DrawableObject : public GameObject
+	class DrawableObject : virtual public GameObject
 	{
 	public:
 		DrawableObject() = default;
@@ -31,7 +31,7 @@ namespace game
 	};
 
 
-	class GeometryObject : public GameObject
+	class GeometryObject : virtual public GameObject
 	{
 	public:
 		GeometryObject() = default;
@@ -50,8 +50,8 @@ namespace game
 		}
 
 		virtual void Draw() = 0;
-		virtual void SetThickness(float thickness) = 0;
-		virtual void SetColor(ALLEGRO_COLOR color) = 0;
+		void SetThickness(float thickness);
+		void SetColor(ALLEGRO_COLOR color);
 
 	protected:
 		Vector2 _pos = { 0.0f, 0.0f };
@@ -79,8 +79,8 @@ namespace game
 		}
 
 		virtual void Move(const Vector2&) = 0;
-		virtual void Rotate(float degrees) = 0;
-		virtual void Scale(float scaleNumber) = 0;
+		void Rotate(float degrees);
+		void Scale(float scaleNumber);
 
 	protected:
 		Vector2 _pos = { 0.0f, 0.0f };
@@ -92,7 +92,7 @@ namespace game
 		//ALLEGRO_COLOR _color = al_map_rgb(100, 100, 100);
 	};
 
-	class Player : public DrawableObject, public TransformableObject
+	class Player : public TransformableObject
 	{
 	public:
 		Player() = default;
