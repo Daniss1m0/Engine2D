@@ -50,9 +50,19 @@ namespace game
 			}
 		}
 
+		void Set_pos(Vector2 pos);
+		void Set_points(std::vector<Point2D> points);
+		void Set_polygon(std::vector<Point2D> polygon);
+		void Set_thickness(float thickness);
+		void Set_color(ALLEGRO_COLOR color);
+
+		Vector2 Get_pos();
+		std::vector<Point2D> Get_points();
+		std::vector<Point2D> Get_polygon();
+		float Get_thickness();
+		ALLEGRO_COLOR Get_color();
+
 		void Draw();
-		void SetThickness(float thickness);
-		void SetColor(ALLEGRO_COLOR color);
 
 	protected:
 		Vector2 _pos = { 0.0f, 0.0f };
@@ -63,7 +73,7 @@ namespace game
 	};
 
 
-	class TransformableObject : virtual public GameObject
+	class TransformableObject : public GeometryObject
 	{
 	public:
 		TransformableObject() = default;
@@ -84,9 +94,6 @@ namespace game
 		void Scale(float scaleNumber);
 
 	protected:
-		Vector2 _pos = { 0.0f, 0.0f };
-		std::vector<Point2D> _points;
-		std::vector<Point2D> _polygon;
 		float _scale = 1;
 		float _orientation = 0; // w k¹tach nie w radianach
 		//float _thickness = 1;
@@ -102,31 +109,10 @@ namespace game
 		void Move(const Vector2& vec);
 	};
 
-	class Polygon :public GeometryObject, public TransformableObject
+	class Polygon : public TransformableObject
 	{
 	public:
-		Polygon() = default;
-
-		Polygon(Vector2 pos, std::vector<Point2D>& polygon)
-		{
-			_pos = pos;
-			_polygon = polygon;
-			_scale = 1;
-
-			for (Point2D& point : polygon) {
-				_points.push_back(point + _pos);
-			}
-		}
-		void Draw();
-		void Rotate(float degrees);
-		void Scale(float scaleNumber);
-
-	protected:
-		Vector2 _pos = { 0.0f, 0.0f };
-		std::vector<Point2D> _points;
-		std::vector<Point2D> _polygon;
-		float _scale = 1;
-		float _orientation = 0;
+		Polygon(Vector2 pos, std::vector<Point2D>& polygon) : TransformableObject(pos, polygon) {}
 	};
 
 }

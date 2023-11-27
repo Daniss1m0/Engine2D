@@ -42,21 +42,65 @@ namespace game
 		_scale = scale;
 	}
 
+	// GEOMETRY OBJECT
 	void GeometryObject::Draw()
 	{
 		renderer.DrawClosedPolygon(_points, _color, _thickness);
 	}
 
-	void GeometryObject::SetColor(ALLEGRO_COLOR color)
+		// SETTERY
+	void GeometryObject::Set_pos(Vector2 pos)
 	{
-		_color = color;
+		_pos = pos;
 	}
 
-	void GeometryObject::SetThickness(float thickness)
+	void GeometryObject::Set_points(std::vector<Point2D> points)
+	{
+		_points = points;
+	}
+
+	void GeometryObject::Set_polygon(std::vector<Point2D> polygon)
+	{
+		_polygon = polygon;
+	}
+
+	void GeometryObject::Set_thickness(float thickness)
 	{
 		_thickness = thickness;
 	}
 
+	void GeometryObject::Set_color(ALLEGRO_COLOR color)
+	{
+		_color = color;
+	}
+
+		// GETTERY
+	Vector2 GeometryObject::Get_pos()
+	{
+		return _pos;
+	}
+
+	std::vector<Point2D> GeometryObject::Get_points()
+	{
+		return _points;
+	}
+
+	std::vector<Point2D> GeometryObject::Get_polygon()
+	{
+		return _polygon;
+	}
+
+	float GeometryObject::Get_thickness()
+	{
+		return _thickness;
+	}
+
+	ALLEGRO_COLOR GeometryObject::Get_color()
+	{
+		return _color;
+	}
+
+	// TRANSFORMABLE OBJECT
 	void TransformableObject::Move(const Vector2& vec)
 	{
 		for(Point2D& point : _points)
@@ -81,44 +125,6 @@ namespace game
 	}
 
 	void TransformableObject::Scale(float scale)
-	{
-		float scaleMultiplier = scale / _scale;
-		_scale = scale;
-
-		for (Point2D& point : _polygon)
-		{
-			point = point * scaleMultiplier;
-		}
-
-		int i = 0;
-		for (Point2D& point : _polygon) {
-			_points[i] = point + _pos;
-			i++;
-		}
-
-	}
-
-	void Polygon::Draw()
-	{
-		renderer.DrawClosedPolygon(_points, _color, _thickness);
-	}
-
-	void Polygon::Rotate(float degrees)
-	{
-		_orientation = degrees;
-		for (Point2D& point : _polygon)
-		{
-			RotatePoint(point, degrees);
-		}
-
-		int i = 0;
-		for (Point2D& point : _polygon) {
-			_points[i] = point + _pos;
-			i++;
-		}
-	}
-
-	void Polygon::Scale(float scale)
 	{
 		float scaleMultiplier = scale / _scale;
 		_scale = scale;

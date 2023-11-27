@@ -52,7 +52,7 @@ void Engine::Run() {
     polygonPoints.push_back(Point2D(-100.0, -100.0));
 
     game::Polygon polygon(Vector2(650.0, 300),polygonPoints);
-    polygon.SetThickness(10.0);
+    polygon.Set_thickness(10.0);
     float scale = 1.0;
     bool up = true;
 
