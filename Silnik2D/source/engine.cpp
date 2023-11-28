@@ -1,6 +1,4 @@
-﻿//zrobic hierarchi klass (np. jak w instrukcji 4 pierwsze zadanie)
-
-#include "engine.h"
+﻿#include "engine.h"
 
 Engine::Engine(int width, int height, float fps) : _screenWidth(width), _screenHeight(height), _FPS(fps) {}
 
@@ -13,7 +11,7 @@ bool Engine::Init() {
     al_install_keyboard();
     al_install_mouse();
 
-    al_init_image_addon(); //
+    al_init_image_addon(); //metoda inicjalizacja
 
     _display = al_create_display(_screenWidth, _screenHeight);
     if (!_display) {
@@ -42,6 +40,13 @@ void Engine::Run() {
     game::Player ply;
     ply.LoadFromFile("player.png");
     ply.Move(Vector2(400.0f, 500.0f));
+
+    game::SpriteObject object;  //dla gry usuniecie
+    object.SetSprite("anim/Shoe1.png", 0);
+    object.SetSprite("anim/Shoe2.png", 1);
+    object.SetSprite("anim/Shoe3.png", 2);
+    object.SetSprite("anim/Shoe4.png", 3);
+    object.Move(Vector2(150.0, 300.0));
 
     struct KeysPushed
     {
@@ -89,7 +94,11 @@ void Engine::Run() {
         }
 
         renderer.ClearScreen();
+
         ply.Draw();
+        object.Animate(); //dla gry usuniecie
+        object.Draw();  //dla gry usuniecie
+
         renderer.FlipDisplay();
     }
 }

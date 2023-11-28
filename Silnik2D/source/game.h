@@ -110,70 +110,20 @@ namespace game
 	};
 
 	class SpriteObject : public DrawableObject, public AnimatedObject {
+	public:
+		SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5), maxFrame(0) {}
+		~SpriteObject();
+		void Animate();
+		void Draw();
+		void SetSprite(const char* spriteFilename, short int frameIndex);
+		void Move(const Vector2& vec);
+
 	private:
-		short int maxFrame = 4;
 		ALLEGRO_BITMAP** anim;
-		int currentFrame;  // Добавляем переменную для отслеживания текущего кадра
+		int currentFrame;
 		int frameCount;
 		int frameDelay;
-
-	public:
-		SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5) {}
-
-		~SpriteObject() {
-			if (anim) {
-				for (int i = 0; i < maxFrame; ++i) {
-					if (anim[i]) {
-						al_destroy_bitmap(anim[i]);
-					}
-				}
-				delete[] anim;
-			}
-		}
-
-		void Draw() override {
-			if (anim[currentFrame]) {
-				_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
-			}
-		}
-
-		void Animate() override {
-			if (++frameCount >= frameDelay) {
-				frameCount = 0;
-				if (++currentFrame >= maxFrame) {
-					currentFrame = 0;
-				}
-			}
-		}
-
-		void SetSprite(const char* spriteFilename, short int frameIndex) {
-			if (!anim) {
-				anim = new ALLEGRO_BITMAP * [maxFrame];
-				for (int i = 0; i < maxFrame; ++i) {
-					anim[i] = nullptr;
-				}
-			}
-
-			if (frameIndex < 0 || frameIndex >= maxFrame) {
-				std::cerr << "Invalid frame index: " << frameIndex << std::endl;
-				return;
-			}
-
-			if (anim[frameIndex]) {
-				al_destroy_bitmap(anim[frameIndex]);
-			}
-
-			anim[frameIndex] = al_load_bitmap(spriteFilename);
-			if (!anim[frameIndex]) {
-				// Обработка ошибки загрузки изображения
-				std::cerr << "Failed to load sprite: " << spriteFilename << std::endl;
-				exit(1);
-			}
-		}
-
-		void Move(const Vector2& vec) {
-			_pos = _pos + vec;
-		}
+		short int maxFrame;
 	};
 
 	class Player : public SpriteObject

@@ -68,7 +68,7 @@ public:
     void Initialize(ALLEGRO_DISPLAY* display);
 
     void ClearScreen();
-    void DrawPixel(Point2D point, const ALLEGRO_COLOR& color); //dziedziczenie???
+    void DrawPixel(Point2D point, const ALLEGRO_COLOR& color);
     void DrawLine(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float thickness);
     void DrawLineIncremental(Point2D start, Point2D end, const ALLEGRO_COLOR& color, float lineWidth);
     void DrawTriangle(Point2D point1, Point2D point2, Point2D point3, const ALLEGRO_COLOR& color);

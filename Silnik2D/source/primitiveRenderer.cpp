@@ -273,18 +273,12 @@ std::vector<Point2D> PrimitiveRenderer::GenerateSquareSpiralPoints(float centerX
 
 // Algorytm Boundary Fill
 void PrimitiveRenderer::boundaryFill(int x, int y, const ALLEGRO_COLOR& fill_color, const ALLEGRO_COLOR& boundary_color) {
-    // Pobierz kolor piksela P
     ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), x, y);
 
-    // Jeśli kolor P jest równy kolorowi wypełnienia lub krawędzi, zakończ
-    if (colorsAreEqual(currentColor, fill_color) || colorsAreEqual(currentColor, boundary_color)) {
+    if (colorsAreEqual(currentColor, fill_color) || colorsAreEqual(currentColor, boundary_color))
         return;
-    }
-
-    // Ustaw kolor P na kolor wypełnienia
     al_put_pixel(x, y, fill_color);
 
-    // Wywołaj rekurencyjnie boundary_fill dla sąsiednich pikseli
     boundaryFill(x + 1, y, fill_color, boundary_color); // prawy piksel
     boundaryFill(x - 1, y, fill_color, boundary_color); // lewy piksel
     boundaryFill(x, y + 1, fill_color, boundary_color); // dolny piksel
@@ -293,27 +287,19 @@ void PrimitiveRenderer::boundaryFill(int x, int y, const ALLEGRO_COLOR& fill_col
 
 // Algorytm Flood Fill
 void PrimitiveRenderer::floodFill(int x, int y, const ALLEGRO_COLOR& fill_color, const ALLEGRO_COLOR& background_color) {
-    // Pobierz kolor piksela P
     ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), x, y);
 
-    // Jeśli kolor P jest równy kolorowi wypełnienia lub tła, zakończ
-    if (colorsAreEqual(currentColor, fill_color) || !colorsAreEqual(currentColor, background_color)) {
+    if (colorsAreEqual(currentColor, fill_color) || !colorsAreEqual(currentColor, background_color))
         return;
-    }
-
-    // Ustaw kolor P na kolor wypełnienia
     al_put_pixel(x, y, fill_color);
 
-    // Wykorzystaj stos do śledzenia pikseli do sprawdzenia
     std::stack<Point2D> pixelsToCheck;
     pixelsToCheck.push(Point2D(x, y));
 
     while (!pixelsToCheck.empty()) {
-        // Pobierz współrzędne piksela z wierzchołka stosu
         Point2D currentPoint = pixelsToCheck.top();
         pixelsToCheck.pop();
 
-        // Sprawdź sąsiednie piksele i dodaj do stosu te, które trzeba sprawdzić
         checkAndAddPixel(pixelsToCheck, Point2D(currentPoint.GetX() + 1, currentPoint.GetY()), fill_color, background_color); // prawy piksel
         checkAndAddPixel(pixelsToCheck, Point2D(currentPoint.GetX() - 1, currentPoint.GetY()), fill_color, background_color); // lewy piksel
         checkAndAddPixel(pixelsToCheck, Point2D(currentPoint.GetX(), currentPoint.GetY() + 1), fill_color, background_color); // dolny piksel
@@ -325,12 +311,10 @@ bool PrimitiveRenderer::colorsAreEqual(const ALLEGRO_COLOR& color1, const ALLEGR
     return color1.r == color2.r && color1.g == color2.g && color1.b == color2.b && color1.a == color2.a;
 }
 
-// Funkcja pomocnicza do sprawdzenia i dodania piksela do stosu w algorytmie Flood Fill
+// Funkcja pomocnicza
 void PrimitiveRenderer::checkAndAddPixel(std::stack<Point2D>& pixelsToCheck, const Point2D& point, const ALLEGRO_COLOR& fillColor, const ALLEGRO_COLOR& backgroundColor) {
-    // Pobierz kolor piksela
     ALLEGRO_COLOR currentColor = al_get_pixel(al_get_target_bitmap(), point.GetX(), point.GetY());
 
-    // Jeśli kolor piksela jest równy kolorowi tła, ustaw go na kolor wypełnienia i dodaj do stosu
     if (colorsAreEqual(currentColor, backgroundColor)) {
         al_put_pixel(point.GetX(), point.GetY(), fillColor);
         pixelsToCheck.push(point);

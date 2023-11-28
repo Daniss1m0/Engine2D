@@ -141,4 +141,61 @@ namespace game
 		}
 
 	}
+	SpriteObject::~SpriteObject() {
+		if (anim) {
+			for (int i = 0; i < maxFrame; ++i) {
+				if (anim[i]) {
+					al_destroy_bitmap(anim[i]);
+				}
+			}
+			delete[] anim;
+		}
+	}
+	void SpriteObject::Animate() {
+		if (maxFrame > 0) {
+			if (++frameCount >= frameDelay) {
+				frameCount = 0;
+				if (++currentFrame >= maxFrame) {
+					currentFrame = 0;
+				}
+			}
+		}
+	}
+	void SpriteObject::Draw() {
+		if (maxFrame > 0 && anim && anim[currentFrame])
+				al_draw_scaled_rotated_bitmap(anim[currentFrame], al_get_bitmap_width(anim[currentFrame]) / 2.0, al_get_bitmap_height(anim[currentFrame]) / 2.0, _pos.x, _pos.y, _scale, _scale, _orientation, 0);
+		else
+				std::cerr << "Bitmap nie zainicjowany." << std::endl;
+	}
+	void SpriteObject::SetSprite(const char* spriteFilename, short int frameIndex) {
+		if (!anim || frameIndex >= maxFrame) {
+			ALLEGRO_BITMAP** newArray = new ALLEGRO_BITMAP * [frameIndex + 1];
+			for (int i = 0; i < maxFrame; ++i) {
+				newArray[i] = anim[i];
+			}
+			for (int i = maxFrame; i <= frameIndex; ++i) {
+				newArray[i] = nullptr;
+			}
+			delete[] anim;
+			anim = newArray;
+			maxFrame = frameIndex + 1;
+		}
+
+		if (frameIndex < 0 || frameIndex >= maxFrame) {
+			std::cerr << "Nieprawidlowy indeks: " << frameIndex << std::endl;
+			return;
+		}
+
+		if (anim[frameIndex])
+			al_destroy_bitmap(anim[frameIndex]);
+
+		anim[frameIndex] = al_load_bitmap(spriteFilename);
+		if (!anim[frameIndex]) {
+			std::cerr << "Nie udalo sie zalodowac! " << spriteFilename << std::endl;
+			exit(1);
+		}
+	}
+	void SpriteObject::Move(const Vector2& vec) {
+		_pos = _pos + vec;
+	}
 }
