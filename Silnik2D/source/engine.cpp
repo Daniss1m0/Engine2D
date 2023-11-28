@@ -45,6 +45,14 @@ void Engine::Run() {
     ply.Move(Vector2(150.0,300.0));
     float i = 0.0;
 
+    game::SpriteObject object;
+    object.SetSprite("anim/Shoe1.png", 0);
+    object.SetSprite("anim/Shoe2.png", 1);
+    object.SetSprite("anim/Shoe3.png", 2);
+    object.SetSprite("anim/Shoe4.png", 3);
+    object.LoadFromFile("anim/Shoe1.png");
+    object.Move(Vector2(150.0, 300.0));
+
     std::vector<Point2D> polygonPoints;
     polygonPoints.push_back(Point2D(-100.0, 100.0));
     polygonPoints.push_back(Point2D(100.0, 100.0));
@@ -67,8 +75,8 @@ void Engine::Run() {
             }
        
             case ALLEGRO_EVENT_TIMER: {
-                ply.SetOrientation(i);
-                ply.SetScale(scale * 0.1);
+              //  ply.SetOrientation(i);
+              //  ply.SetScale(scale * 0.1);
                 polygon.Rotate(6);
                 polygon.Scale(scale);
                 i += 0.1;
@@ -84,7 +92,7 @@ void Engine::Run() {
                     if(scale < 0.5)
                         up = true;
                 }
-             
+                //object.Animate();
                 break;
             }
 
@@ -97,7 +105,9 @@ void Engine::Run() {
             }
         }
         renderer.ClearScreen();
-        ply.Draw();
+        //ply.Draw();
+        object.Draw();
+        object.Animate();
         polygon.Draw();
         renderer.FlipDisplay();
     }
