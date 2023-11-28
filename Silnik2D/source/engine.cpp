@@ -59,6 +59,15 @@ void Engine::Run() {
                 break;
             }
 
+            case ALLEGRO_EVENT_TIMER: {
+                if (KeysPushed.KeyA)
+                    ply.Move(Vector2(-3.0f, 0.0f));
+                else if (KeysPushed.KeyB)
+                    ply.Move(Vector2(3.0f, 0.0f));
+
+                break;
+            }
+
             case ALLEGRO_EVENT_KEY_DOWN: {
                 switch (event.keyboard.keycode)
                 {
@@ -78,12 +87,6 @@ void Engine::Run() {
                 KeysPushed.KeyB = false;
                 break;
         }
-
-        if (KeysPushed.KeyA)
-            ply.Move(Vector2(-3.0f, 0.0f));
-
-        else if (KeysPushed.KeyB)
-            ply.Move(Vector2(3.0f, 0.0f));
 
         renderer.ClearScreen();
         ply.Draw();
