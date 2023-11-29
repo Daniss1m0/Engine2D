@@ -14,7 +14,7 @@ namespace game
 
 	void Player::Draw()
 	{
-		std::cout << "draw player" << std::endl;
+		//std::cout << "draw player" << std::endl;
 		_handler.Draw(_pos.x, _pos.y, _orientation,_scale);
 	}
 
@@ -35,7 +35,7 @@ namespace game
 
 	void BitmapObject::Draw()
 	{
-		std::cout << "draw bitmap" << std::endl;
+		//std::cout << "draw bitmap" << std::endl;
 		_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
 	}
 
@@ -214,7 +214,7 @@ namespace game
 
 	void test::Update()
 	{
-		std::cout << "updated" << std::endl;
+		//std::cout << "updated" << std::endl;
 	}
 
 }
