@@ -28,6 +28,11 @@ namespace game
 		Draw();
 	}
 
+	void Player::Shoot()
+	{
+		Projectile projectile(Vector2(_pos.x, _pos.y - 10), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, 1));
+	}
+
 	bool BitmapObject::LoadFromFile(const char* filename)
 	{
 		return _handler.LoadFromFile(filename);
@@ -110,6 +115,7 @@ namespace game
 	// TRANSFORMABLE OBJECT
 	void TransformableObject::Move(const Vector2& vec)
 	{
+		_pos = _pos + vec;
 		for(Point2D& point : _points)
 		{
 			point = point + vec;
@@ -215,6 +221,40 @@ namespace game
 	void test::Update()
 	{
 		//std::cout << "updated" << std::endl;
+	}
+
+	void AllegroPrimitivesFilledCircleObject::Draw()
+	{
+		renderer.DrawFilledCircle(Point2D(_pos.x, _pos.y), _radius, _color);
+	}
+
+	void AllegroPrimitivesFilledCircleObject::Update()
+	{
+		Draw();
+	}
+
+	void MovingFilledCircleObject::Update()
+	{
+		_pos = _pos + _velocity;
+		Draw();
+	}
+
+	void Projectile::Update()
+	{
+		_pos = _pos + _velocity;
+		if(_pos.y<=1)
+			delete this;
+
+		Draw();
+
+		for (const auto& enemy : game::EnemyVector) {
+			if ((enemy->_pos - _pos).Magnitude() < enemy->_radius + _radius)
+			{
+				delete enemy;
+				delete this;
+			}
+		}
+
 	}
 
 }

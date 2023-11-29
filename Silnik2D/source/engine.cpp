@@ -52,9 +52,12 @@ void Engine::Run() {
     {
         bool KeyA = false;
         bool KeyB = false;
+        bool KeySpace = false;
     } KeysPushed;
 
-    game::test* obiektTestowy = new game::test();
+    //game::test* obiektTestowy = new game::test();
+
+    game::Projectile* pr1 = new game::Projectile(Vector2(400.0, 300.0), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, 1.0));
 
     while (running) {
         ALLEGRO_EVENT event;
@@ -68,10 +71,17 @@ void Engine::Run() {
 
             case ALLEGRO_EVENT_TIMER: {
                 renderer.ClearScreen();
+
+                int k = 0;
                 for (const auto& obiekt : game::UpdatableVector) {
                     obiekt->Update();
+                    k++;
                 }
-                
+                std::cout <<"liczba obiektow w updatable vector: "<< k << std::endl;
+
+                if (KeysPushed.KeySpace)
+                    ply.Shoot();
+
                 if (KeysPushed.KeyA)
                     ply.Move(Vector2(-3.0f, 0.0f));
                 else if (KeysPushed.KeyB)
@@ -91,6 +101,10 @@ void Engine::Run() {
                 case ALLEGRO_KEY_D:
                     KeysPushed.KeyB = true;
                     break;
+
+                case ALLEGRO_KEY_SPACE:
+                    KeysPushed.KeySpace = true;
+                    break;
                 }
                 break;
             }
@@ -98,6 +112,7 @@ void Engine::Run() {
             case ALLEGRO_EVENT_KEY_UP:
                 KeysPushed.KeyA = false;
                 KeysPushed.KeyB = false;
+                KeysPushed.KeySpace = false;
                 break;
         }   
     }

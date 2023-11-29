@@ -14,13 +14,14 @@ namespace game
 			std::cout << "update" << std::endl;
 		}
 
-		virtual void Draw(){}
-		virtual void Move(){}
+		//virtual void Draw(){}
+		//virtual void Move(){}
 
 		virtual ~UpdatableObject() {};
 	};
 
 	static std::vector<UpdatableObject*> UpdatableVector; // wektor wszystkich obiektow ktore sa updatowane z timer eventem
+	
 
 	class GameObject
 	{
@@ -158,6 +159,7 @@ namespace game
 		void Draw();
 		void Move(const Vector2& vec);
 		void Update();
+		void Shoot();
 	};
 
 	class Polygon : public TransformableObject
@@ -180,6 +182,90 @@ namespace game
 
 	protected:
 		int _nic = 0;
+	};
+
+	class AllegroPrimitivesFilledCircleObject :virtual public GameObject,public UpdatableObject
+	{
+	public:
+		AllegroPrimitivesFilledCircleObject() = default;
+		AllegroPrimitivesFilledCircleObject(Vector2 pos, float radius, ALLEGRO_COLOR color)
+		{
+			_pos = pos;
+			_radius = radius;
+			_color = color;
+
+			UpdatableVector.push_back(this);
+		}
+
+		void Draw();
+		void Update();
+
+		~AllegroPrimitivesFilledCircleObject(){}
+
+		Vector2 _pos = { 0.0f,0.0f };
+		float _radius;
+		ALLEGRO_COLOR _color= al_map_rgb(255, 0, 0);
+	};
+
+	class MovingFilledCircleObject : public AllegroPrimitivesFilledCircleObject
+	{
+	public:
+		MovingFilledCircleObject() = default;
+		MovingFilledCircleObject(Vector2 pos, float radius, ALLEGRO_COLOR color, Vector2 velocity)
+		{
+			_pos = pos;
+			_radius = radius;
+			_color = color;
+			_velocity = velocity;
+
+			UpdatableVector.push_back(this);
+		}
+
+		void Update();
+
+	protected:
+		Vector2 _velocity = { 0.0f,0.0f };
+	};
+
+	static std::vector<MovingFilledCircleObject*> EnemyVector;
+	class Enemy :public MovingFilledCircleObject
+	{
+	public:
+		Enemy(Vector2 pos, float radius, ALLEGRO_COLOR color, Vector2 velocity)
+		{
+			_pos = pos;
+			_radius = radius;
+			_color = color;
+			_velocity = velocity;
+
+			UpdatableVector.push_back(this);
+			EnemyVector.push_back(this);
+		}
+	};
+	
+
+
+	//static std::vector<Projectile*> ProjectileVector;
+	class Projectile : public MovingFilledCircleObject
+	{
+	public:
+		Projectile(Vector2 pos, float radius, ALLEGRO_COLOR color, Vector2 velocity)
+		{
+			_pos = pos;
+			_radius = radius;
+			_color = color;
+			_velocity = velocity;
+
+			UpdatableVector.push_back(this);
+			//ProjectileVector.push_back(this);
+			std::cout << "projectile created" << std::endl;
+		}
+		~Projectile()
+		{
+			std::cout << "projectile being deleted" << std::endl;
+		}
+
+		void Update();
 	};
 
 }
