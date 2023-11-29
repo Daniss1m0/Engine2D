@@ -30,7 +30,7 @@ namespace game
 
 	void Player::Shoot()
 	{
-		Projectile projectile(Vector2(_pos.x, _pos.y - 10), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, 1));
+		game::Projectile* obiektProjectileowy = new game::Projectile(Vector2(_pos.x, _pos.y-50.0), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, -5.0));
 	}
 
 	bool BitmapObject::LoadFromFile(const char* filename)
@@ -218,43 +218,16 @@ namespace game
 		Draw();
 	}
 
-	void test::Update()
-	{
-		//std::cout << "updated" << std::endl;
-	}
-
-	void AllegroPrimitivesFilledCircleObject::Draw()
+	void Projectile::Draw()
 	{
 		renderer.DrawFilledCircle(Point2D(_pos.x, _pos.y), _radius, _color);
-	}
-
-	void AllegroPrimitivesFilledCircleObject::Update()
-	{
-		Draw();
-	}
-
-	void MovingFilledCircleObject::Update()
-	{
-		_pos = _pos + _velocity;
-		Draw();
 	}
 
 	void Projectile::Update()
 	{
 		_pos = _pos + _velocity;
-		if(_pos.y<=1)
-			delete this;
 
 		Draw();
-
-		for (const auto& enemy : game::EnemyVector) {
-			if ((enemy->_pos - _pos).Magnitude() < enemy->_radius + _radius)
-			{
-				delete enemy;
-				delete this;
-			}
-		}
-
+		
 	}
-
 }
