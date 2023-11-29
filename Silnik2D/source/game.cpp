@@ -22,22 +22,22 @@ namespace game
 		_pos =_pos+ vec;
 	}
 
-	bool DrawableObject::LoadFromFile(const char* filename)
+	bool BitmapObject::LoadFromFile(const char* filename)
 	{
 		return _handler.LoadFromFile(filename);
 	}
 
-	void DrawableObject::Draw()
+	void BitmapObject::Draw()
 	{
 		_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
 	}
 
-	void DrawableObject::SetOrientation(float orientation)
+	void BitmapObject::SetOrientation(float orientation)
 	{
 		_orientation = orientation;
 	}
 
-	void DrawableObject::SetScale(float scale)
+	void BitmapObject::SetScale(float scale)
 	{
 		_scale = scale;
 	}

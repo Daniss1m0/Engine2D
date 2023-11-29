@@ -25,10 +25,10 @@ namespace game
 	};
 
 
-	class DrawableObject : virtual public GameObject
+	class BitmapObject : virtual public GameObject
 	{
 	public:
-		DrawableObject() = default;
+		BitmapObject() = default;
 
 		virtual void Draw() = 0;
 		void SetOrientation(float degrees);
@@ -109,7 +109,7 @@ namespace game
 		//ALLEGRO_COLOR _color = al_map_rgb(100, 100, 100);
 	};
 
-	class SpriteObject : public DrawableObject, public AnimatedObject {
+	class SpriteObject : public BitmapObject, public AnimatedObject {
 	public:
 		SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5), maxFrame(0) {}
 		~SpriteObject();
