@@ -41,18 +41,24 @@ void Engine::Run() {
     ply.LoadFromFile("player.png");
     ply.Move(Vector2(400.0f, 500.0f));
 
-    game::SpriteObject object;  //dla gry usuniecie
+    /*game::SpriteObject object;  //dla gry usuniecie
     object.SetSprite("anim/Shoe1.png", 0);
     object.SetSprite("anim/Shoe2.png", 1);
     object.SetSprite("anim/Shoe3.png", 2);
     object.SetSprite("anim/Shoe4.png", 3);
-    object.Move(Vector2(150.0, 300.0));
+    object.Move(Vector2(150.0, 300.0));*/
 
     struct KeysPushed
     {
         bool KeyA = false;
         bool KeyB = false;
         bool KeySpace = false;
+        bool KeyW = false;
+        bool KeyS = false;
+        bool KeyQ = false;
+        bool KeyE = false;
+        bool KeyX = false;
+        bool KeyZ = false;
     } KeysPushed;
 
     game::Projectile* obiektProjectileowy = new game::Projectile(Vector2(400.0, 300.0), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, -1.0));
@@ -84,6 +90,18 @@ void Engine::Run() {
                     ply.Move(Vector2(-3.0f, 0.0f));
                 else if (KeysPushed.KeyB)
                     ply.Move(Vector2(3.0f, 0.0f));
+                else if (KeysPushed.KeyW)
+                    ply.Move(Vector2(0.0f, -3.0f));
+                else if (KeysPushed.KeyS)
+                    ply.Move(Vector2(0.0f, 3.0f));
+                else if (KeysPushed.KeyQ)
+                    ply.SetOrientation(ply.GetOrientation() - 0.1);
+                else if (KeysPushed.KeyE)
+                    ply.SetOrientation(ply.GetOrientation() + 0.1);
+                else if (KeysPushed.KeyX)
+                    ply.SetScale(ply.GetScale() + 0.1);
+                else if (KeysPushed.KeyZ)
+                    ply.SetScale(ply.GetScale() - 0.1);
 
                 renderer.FlipDisplay();
                 break;
@@ -100,10 +118,38 @@ void Engine::Run() {
                     KeysPushed.KeyB = true;
                     break;
 
+                case ALLEGRO_KEY_S:
+                    KeysPushed.KeyS = true;
+                    break;
+
+                case ALLEGRO_KEY_W:
+                    KeysPushed.KeyW = true;
+                    break;
+
+                case ALLEGRO_KEY_Q:
+                    KeysPushed.KeyQ = true;
+                    break;
+
+                case ALLEGRO_KEY_E:
+                    KeysPushed.KeyE = true;
+                    break;
+
                 case ALLEGRO_KEY_SPACE:
                     KeysPushed.KeySpace = true;
                     break;
+
+                case ALLEGRO_KEY_X:
+                    KeysPushed.KeyX = true;
+                    break;
+
+                case ALLEGRO_KEY_Z:
+                    KeysPushed.KeyZ = true;
+                    break;
+
+
                 }
+
+
                 break;
             }
 
@@ -111,6 +157,12 @@ void Engine::Run() {
                 KeysPushed.KeyA = false;
                 KeysPushed.KeyB = false;
                 KeysPushed.KeySpace = false;
+                KeysPushed.KeyQ = false;
+                KeysPushed.KeyE = false;
+                KeysPushed.KeyS = false;
+                KeysPushed.KeyW = false;
+                KeysPushed.KeyX = false;
+                KeysPushed.KeyZ = false;
                 break;
         }   
     }

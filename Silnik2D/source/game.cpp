@@ -54,6 +54,16 @@ namespace game
 		_scale = scale;
 	}
 
+	float BitmapObject::GetOrientation()
+	{
+		return _orientation;
+	}
+
+	float BitmapObject::GetScale()
+	{
+		return _scale;
+	}
+
 	// GEOMETRY OBJECT
 	void GeometryObject::Draw()
 	{
@@ -226,7 +236,7 @@ namespace game
 	void Projectile::Update()
 	{
 		_pos = _pos + _velocity;
-		std::cout << "cos" << std::endl;
+		//std::cout << "cos" << std::endl;
 		Draw();
 		
 	}

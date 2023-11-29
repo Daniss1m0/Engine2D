@@ -50,6 +50,9 @@ namespace game
 		void SetOrientation(float degrees);
 		void SetScale(float scale);
 
+		float GetOrientation();
+		float GetScale();
+
 		bool LoadFromFile(const char* filename);
 
 	protected:
