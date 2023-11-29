@@ -54,6 +54,8 @@ void Engine::Run() {
         bool KeyB = false;
     } KeysPushed;
 
+    game::test* obiektTestowy = new game::test();
+
     while (running) {
         ALLEGRO_EVENT event;
         al_wait_for_event(_eventQueue, &event);
@@ -65,11 +67,17 @@ void Engine::Run() {
             }
 
             case ALLEGRO_EVENT_TIMER: {
+                renderer.ClearScreen();
+                for (const auto& obiekt : game::UpdatableVector) {
+                    obiekt->Update();
+                }
+                
                 if (KeysPushed.KeyA)
                     ply.Move(Vector2(-3.0f, 0.0f));
                 else if (KeysPushed.KeyB)
                     ply.Move(Vector2(3.0f, 0.0f));
 
+                renderer.FlipDisplay();
                 break;
             }
 
@@ -91,15 +99,7 @@ void Engine::Run() {
                 KeysPushed.KeyA = false;
                 KeysPushed.KeyB = false;
                 break;
-        }
-
-        renderer.ClearScreen();
-
-        ply.Draw();
-        object.Animate(); //dla gry usuniecie
-        object.Draw();  //dla gry usuniecie
-
-        renderer.FlipDisplay();
+        }   
     }
 }
 

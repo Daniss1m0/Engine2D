@@ -14,12 +14,18 @@ namespace game
 
 	void Player::Draw()
 	{
+		std::cout << "draw player" << std::endl;
 		_handler.Draw(_pos.x, _pos.y, _orientation,_scale);
 	}
 
 	void Player::Move(const Vector2& vec)
 	{
 		_pos =_pos+ vec;
+	}
+
+	void Player::Update()
+	{
+		Draw();
 	}
 
 	bool BitmapObject::LoadFromFile(const char* filename)
@@ -29,6 +35,7 @@ namespace game
 
 	void BitmapObject::Draw()
 	{
+		std::cout << "draw bitmap" << std::endl;
 		_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
 	}
 
@@ -198,4 +205,16 @@ namespace game
 	void SpriteObject::Move(const Vector2& vec) {
 		_pos = _pos + vec;
 	}
+
+	void SpriteObject::Update()
+	{
+		Animate();
+		Draw();
+	}
+
+	void test::Update()
+	{
+		std::cout << "updated" << std::endl;
+	}
+
 }

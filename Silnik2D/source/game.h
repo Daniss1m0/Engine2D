@@ -6,6 +6,21 @@
 
 namespace game
 {
+	class UpdatableObject
+	{
+	public:
+		virtual void Update()
+		{
+			std::cout << "update" << std::endl;
+		}
+
+		virtual void Draw(){}
+		virtual void Move(){}
+
+		virtual ~UpdatableObject() {};
+	};
+
+	static std::vector<UpdatableObject*> UpdatableVector; // wektor wszystkich obiektow ktore sa updatowane z timer eventem
 
 	class GameObject
 	{
@@ -109,36 +124,62 @@ namespace game
 		//ALLEGRO_COLOR _color = al_map_rgb(100, 100, 100);
 	};
 
-	class SpriteObject : public BitmapObject, public AnimatedObject {
+	class SpriteObject : public BitmapObject, public AnimatedObject,public UpdatableObject {
 	public:
-		SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5), maxFrame(0) {}
+		//SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5), maxFrame(0) {}
+		SpriteObject()
+		{
+			UpdatableVector.push_back(this);
+		}
 		~SpriteObject();
 		void Animate();
 		void Draw();
 		void SetSprite(const char* spriteFilename, short int frameIndex);
 		void Move(const Vector2& vec);
-
+		void Update();
 	private:
-		ALLEGRO_BITMAP** anim;
-		int currentFrame;
-		int frameCount;
-		int frameDelay;
-		short int maxFrame;
+		ALLEGRO_BITMAP** anim=nullptr;
+		int currentFrame=0;
+		int frameCount=0;
+		int frameDelay=5;
+		short int maxFrame=0;
 	};
 
 	class Player : public SpriteObject
 	{
 	public:
-		Player() = default;
+		//Player() = default;
+
+		Player()
+		{
+			UpdatableVector.push_back(this);
+		}
 
 		void Draw();
 		void Move(const Vector2& vec);
+		void Update();
 	};
 
 	class Polygon : public TransformableObject
 	{
 	public:
 		Polygon(Vector2 pos, std::vector<Point2D>& polygon) : TransformableObject(pos, polygon) {}
+	};
+
+	//a
+
+	class test :public UpdatableObject
+	{
+	public:
+		test()
+		{
+			UpdatableVector.push_back(this);
+		}
+
+		void Update();
+
+	protected:
+		int _nic = 0;
 	};
 
 }
