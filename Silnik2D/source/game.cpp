@@ -226,7 +226,7 @@ namespace game
 	void Projectile::Update()
 	{
 		_pos = _pos + _velocity;
-
+		std::cout << "cos" << std::endl;
 		Draw();
 		
 	}

@@ -168,22 +168,6 @@ namespace game
 		Polygon(Vector2 pos, std::vector<Point2D>& polygon) : TransformableObject(pos, polygon) {}
 	};
 
-	//a
-
-	/*class Projectile :public UpdatableObject
-	{
-	public:
-		Projectile()
-		{
-			UpdatableVector.push_back(this);
-		}
-
-		void Update();
-
-	protected:
-		int _nic = 0;
-	};*/
-
 	class Projectile :public UpdatableObject, virtual public GameObject
 	{
 	public:
