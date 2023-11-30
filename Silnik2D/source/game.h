@@ -14,9 +14,6 @@ namespace game
 			std::cout << "update" << std::endl;
 		}
 
-		//virtual void Draw(){}
-		//virtual void Move(){}
-
 		virtual ~UpdatableObject() {};
 	};
 
@@ -41,7 +38,7 @@ namespace game
 	};
 
 
-	class BitmapObject : virtual public GameObject
+	class BitmapObject : virtual public GameObject,virtual public UpdatableObject
 	{
 	public:
 		BitmapObject() = default;
@@ -54,6 +51,7 @@ namespace game
 		float GetScale();
 
 		bool LoadFromFile(const char* filename);
+		void Update();
 
 	protected:
 		BitmapHandler _handler;
@@ -63,7 +61,7 @@ namespace game
 	};
 
 
-	class GeometryObject : virtual public GameObject
+	class GeometryObject : virtual public GameObject, public UpdatableObject
 	{
 	public:
 		GeometryObject() = default;
@@ -76,6 +74,9 @@ namespace game
 			for (Point2D& point : polygon) {
 				_points.push_back(point + _pos);
 			}
+
+			UpdatableVector.push_back(this);
+
 		}
 
 		void Set_pos(Vector2 pos);
@@ -91,6 +92,7 @@ namespace game
 		ALLEGRO_COLOR Get_color();
 
 		void Draw();
+		void Update();
 
 	protected:
 		Vector2 _pos = { 0.0f, 0.0f };
@@ -115,11 +117,16 @@ namespace game
 			for (Point2D& point : polygon) {
 				_points.push_back(point + _pos);
 			}
+
+			UpdatableVector.push_back(this);
 		}
 
 		void Move(const Vector2&);
 		void Rotate(float degrees);
 		void Scale(float scaleNumber);
+		void Update();
+		float GetScale();
+		float GetOrientation();
 
 	protected:
 		float _scale = 1;
@@ -128,7 +135,7 @@ namespace game
 		//ALLEGRO_COLOR _color = al_map_rgb(100, 100, 100);
 	};
 
-	class SpriteObject : public BitmapObject, public AnimatedObject,public UpdatableObject {
+	class SpriteObject : public BitmapObject, public AnimatedObject {
 	public:
 		//SpriteObject() : anim(nullptr), currentFrame(0), frameCount(0), frameDelay(5), maxFrame(0) {}
 		SpriteObject()

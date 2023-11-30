@@ -41,12 +41,22 @@ void Engine::Run() {
     ply.LoadFromFile("player.png");
     ply.Move(Vector2(400.0f, 500.0f));
 
-    /*game::SpriteObject object;  //dla gry usuniecie
+    game::SpriteObject object;
     object.SetSprite("anim/Shoe1.png", 0);
     object.SetSprite("anim/Shoe2.png", 1);
     object.SetSprite("anim/Shoe3.png", 2);
     object.SetSprite("anim/Shoe4.png", 3);
-    object.Move(Vector2(150.0, 300.0));*/
+    object.Move(Vector2(150.0, 300.0));
+
+    std::vector<Point2D> polygon;
+    polygon.push_back(Point2D(-50.0, -50.0));
+    polygon.push_back(Point2D(50.0, -50.0));
+    polygon.push_back(Point2D(50.0, 50.0));
+    polygon.push_back(Point2D(-50.0, 50.0));
+
+    game::Polygon wielokat(Vector2(500.0,300.0),polygon);
+    wielokat.Set_thickness(1.0);
+    bool transformationFlag = false;
 
     struct KeysPushed
     {
@@ -61,8 +71,6 @@ void Engine::Run() {
         bool KeyZ = false;
     } KeysPushed;
 
-    game::Projectile* obiektProjectileowy = new game::Projectile(Vector2(400.0, 300.0), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, -1.0));
-
     while (running) {
         ALLEGRO_EVENT event;
         al_wait_for_event(_eventQueue, &event);
@@ -76,12 +84,22 @@ void Engine::Run() {
             case ALLEGRO_EVENT_TIMER: {
                 renderer.ClearScreen();
 
-                int k = 0;
+                //int k = 0;
                 for (const auto& obiekt : game::UpdatableVector) {
                     obiekt->Update();
-                    k++;
+                    //k++;
                 }
                 //std::cout <<"liczba obiektow w updatable vector: "<< k << std::endl;
+
+                if(wielokat.GetScale() > 2.0 or wielokat.GetScale()<-2.0)
+                {
+                    transformationFlag = not transformationFlag;
+                }
+                if (transformationFlag)
+                    wielokat.Scale(wielokat.GetScale()+0.05);
+                else
+                    wielokat.Scale(wielokat.GetScale() - 0.05);
+                wielokat.Rotate(3.0);
 
                 if (KeysPushed.KeySpace)
                     ply.Shoot();

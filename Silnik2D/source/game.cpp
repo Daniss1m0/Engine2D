@@ -44,6 +44,11 @@ namespace game
 		_handler.Draw(_pos.x, _pos.y, _orientation, _scale);
 	}
 
+	void BitmapObject::Update()
+	{
+		Draw();
+	}
+
 	void BitmapObject::SetOrientation(float orientation)
 	{
 		_orientation = orientation;
@@ -122,6 +127,11 @@ namespace game
 		return _color;
 	}
 
+	void GeometryObject::Update()
+	{
+		Draw();
+	}
+
 	// TRANSFORMABLE OBJECT
 	void TransformableObject::Move(const Vector2& vec)
 	{
@@ -162,8 +172,24 @@ namespace game
 			_points[i] = point + _pos;
 			i++;
 		}
+	}
+
+	float TransformableObject::GetScale()
+	{
+		return _scale;
+	}
+
+	float TransformableObject::GetOrientation()
+	{
+		return _orientation;
+	}
+
+	void TransformableObject::Update()
+	{
+		Draw();
 
 	}
+
 	SpriteObject::~SpriteObject() {
 		if (anim) {
 			for (int i = 0; i < maxFrame; ++i) {
