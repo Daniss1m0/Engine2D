@@ -3,7 +3,7 @@
 namespace game
 {
 
-	void RotatePoint(Point2D& point, float angle) { // angle w katach nie w radianach
+	void RotatePoint(Point2D& point, float angle) { //angle w katach nie w radianach
 		angle = angle * 3.14159/180.0;
 		double x = point.GetX() * cos(angle) - point.GetY() * sin(angle);
 		double y = point.GetX() * sin(angle) + point.GetY() * cos(angle);
