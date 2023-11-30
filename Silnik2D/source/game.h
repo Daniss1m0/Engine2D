@@ -169,7 +169,6 @@ namespace game
 		void Draw();
 		void Move(const Vector2& vec);
 		void Update();
-		void Shoot();
 	};
 
 	class Polygon : public TransformableObject

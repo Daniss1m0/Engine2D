@@ -28,11 +28,6 @@ namespace game
 		Draw();
 	}
 
-	void Player::Shoot()
-	{
-		game::Projectile* obiektProjectileowy = new game::Projectile(Vector2(_pos.x, _pos.y-50.0), 5.0, al_map_rgb(255, 255, 255), Vector2(0.0, -5.0));
-	}
-
 	bool BitmapObject::LoadFromFile(const char* filename)
 	{
 		return _handler.LoadFromFile(filename);

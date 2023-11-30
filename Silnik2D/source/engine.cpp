@@ -62,7 +62,6 @@ void Engine::Run() {
     {
         bool KeyA = false;
         bool KeyB = false;
-        bool KeySpace = false;
         bool KeyW = false;
         bool KeyS = false;
         bool KeyQ = false;
@@ -101,8 +100,6 @@ void Engine::Run() {
                     wielokat.Scale(wielokat.GetScale() - 0.05);
                 wielokat.Rotate(3.0);
 
-                if (KeysPushed.KeySpace)
-                    ply.Shoot();
 
                 if (KeysPushed.KeyA)
                     ply.Move(Vector2(-3.0f, 0.0f));
@@ -152,10 +149,6 @@ void Engine::Run() {
                     KeysPushed.KeyE = true;
                     break;
 
-                case ALLEGRO_KEY_SPACE:
-                    KeysPushed.KeySpace = true;
-                    break;
-
                 case ALLEGRO_KEY_X:
                     KeysPushed.KeyX = true;
                     break;
@@ -174,7 +167,6 @@ void Engine::Run() {
             case ALLEGRO_EVENT_KEY_UP:
                 KeysPushed.KeyA = false;
                 KeysPushed.KeyB = false;
-                KeysPushed.KeySpace = false;
                 KeysPushed.KeyQ = false;
                 KeysPushed.KeyE = false;
                 KeysPushed.KeyS = false;
